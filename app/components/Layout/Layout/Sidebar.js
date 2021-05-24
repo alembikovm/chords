@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 const Sidebar = styled.div`
-  height: 848px;
+  min-height: 100%;
+  max-height: 848px;
   background-color: #FFFFFF;
 `;
 

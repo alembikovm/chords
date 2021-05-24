@@ -1,16 +1,8 @@
 import React from 'react';
-import {Route} from "react-router-dom";
-import {Chords, Foo} from "../components/modules";
+import {Redirect, Route} from "react-router-dom";
+import View from "../components/modules/chords/View";
+import {Chords} from '../components/modules';
 
-export default () => {
-    return (
-        <>
-            <Route exact path="/">
-                <Chords />
-            </Route>
-            <Route path="/foo">
-                <Foo />
-            </Route>
-        </>
-    );
-}
+export default [
+    ...Chords,
+];

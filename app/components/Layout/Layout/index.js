@@ -7,7 +7,7 @@ import Sidebar from './Sidebar';
 
 const Layout = styled(LayoutFronton)`
   display: grid;
-  grid-template-columns: 240px 1505px;
+  grid-template-columns: 240px 1fr;
   grid-column-gap: 12px;
   min-height: 100vh;
   background-color: #F2F3F5;

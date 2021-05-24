@@ -18,4 +18,9 @@ export default createGlobalStyle`
     a:visited {
       color: inherit;
     }
+    
+    ul {
+      padding: 0px;
+      margin: 0px;
+    }
 `;

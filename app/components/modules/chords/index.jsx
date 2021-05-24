@@ -1,29 +1,19 @@
 import React from 'react';
-import Container from './Container';
-import ContentWrapper from './ContentWrapper';
-import {Dropdown} from '../../common';
+import {Redirect, Route} from 'react-router-dom';
+import View from './View';
+import Search from './Search';
 
-function Chords() {
-    const options = [
-        {id: 0, value: 'Яблоко'},
-        {id: 1, value: 'Апельсин'},
-    ];
-    const selectedValue = 0;
-
-    return (
-        <Container>
-            <ContentWrapper>
-                <div>
-                    Для поиска связки выбери ее тип и критерий поиска
-                </div>
-                <Dropdown
-                    value={selectedValue}
-                    options={options}
-                    placeholder="Выберите тип связки"
-                />
-            </ContentWrapper>
-        </Container>
-    );
-}
-
-export default Chords;
+export default [
+    <Route exact path="/">
+        <Redirect to="/chords" />
+    </Route>,
+    <Route
+        path="/chords"
+        render={({match: {url}}) => (
+            <>
+                <Route exact path={`${url}/`} component={View} />
+                <Route path={`${url}/search`} component={Search} />
+            </>
+        )}
+    />
+];

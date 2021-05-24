@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 import { StyleSheetManager } from 'styled-components';
 import { ThemeProvider } from 'fronton-react';
 import GlobalStyle from './GlobalStyle';
 import Layout from './components/Layout';
-import {Chords} from './components/modules';
+import screens from './screens';
 
 document.addEventListener('DOMContentLoaded', () => {
 	ReactDOM.render(
@@ -15,7 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
 				<ThemeProvider>
 					<Router>
 						<Layout>
-							<Chords />
+							<Switch>
+								{screens}
+							</Switch>
 						</Layout>
 					</Router>
 				</ThemeProvider>

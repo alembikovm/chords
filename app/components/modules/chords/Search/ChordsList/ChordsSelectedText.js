@@ -1,0 +1,9 @@
+import styled from 'styled-components';
+
+export default styled.div`
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  text-transform: uppercase;
+  color: #999999;
+`;

@@ -3,8 +3,7 @@ import Container from './Container';
 import MenuItem from './components/MenuItem';
 
 const items = [
-    { to: '/', label: 'Связки' },
-    { to: '/foo', label: 'Foo' },
+    { to: '/chords', label: 'Связки' },
 ];
 
 function Menu() {
