@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export default styled.li`
-  padding: 22px 30px;
+export default styled.div`
   display: flex;
+  margin-top: 8px;
 `;

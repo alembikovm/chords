@@ -27,7 +27,7 @@ class Chords extends React.Component {
         this.setState(() => ({searchString: event.target.value}));
     }
 
-    onChangeSearchString = (event) => {
+    onChangeSearchBy = (event) => {
         this.setState(() => ({searchBy: event.target.value}));
     }
 
@@ -37,9 +37,11 @@ class Chords extends React.Component {
 
     render() {
         const chordsItems = [
-            {id: 1, value: 'Type 1'},
-            {id: 2, value: 'Type 2'},
-            {id: 3, value: 'Type 3'},
+            {id: 1, value: 'Компоненты'},
+            {id: 2, value: 'Дублоны'},
+            {id: 3, value: 'Похожие товары'},
+            {id: 4, value: 'Комплименты'},
+            {id: 5, value: 'Замена'},
         ];
         const searchByItems = [
             {id: 1, value: 'Поиск по SKU'},
@@ -97,7 +99,7 @@ class Chords extends React.Component {
                                                 key={id}
                                                 id={id}
                                                 value={value}
-                                                onChange={this.onChangeSearchString}
+                                                onChange={this.onChangeSearchBy}
                                             >
                                                 {value}
                                             </DropdownItem>

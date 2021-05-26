@@ -6,13 +6,13 @@ class List extends React.Component {
     render() {
         return (
             <ListWrapper>
-                <ul>
-                    <ListItem/>
-                    <ListItem/>
-                    <ListItem/>
-                    <ListItem/>
-                    <ListItem/>
-                </ul>
+                {this.props.items.map((item) => (
+                    <ListItem
+                        key={item._id}
+                        onItemCheckClick={this.props.onItemCheckClick}
+                        {...item}
+                    />
+                ))}
             </ListWrapper>
         );
     }
