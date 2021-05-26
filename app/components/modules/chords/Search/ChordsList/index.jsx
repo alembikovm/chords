@@ -8,7 +8,6 @@ import PaginationContainer from "./PaginationContainer";
 import List from './List';
 import {Pagination, PaginationItem} from "fronton-react";
 import {Checkbox} from 'fronton-react';
-import items from './items';
 
 class ChordsList extends React.Component {
     constructor(props) {
@@ -16,7 +15,7 @@ class ChordsList extends React.Component {
         this.state = {
             selectedIds: [],
             selectAll: false,
-            items,
+            items: props.chords.map((chord) => ({...chord, checked: false})),
         };
     }
 

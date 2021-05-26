@@ -1,6 +1,6 @@
 import React from 'react';
 import {Redirect, Route} from 'react-router-dom';
-import View from './View';
+import Main from './Main';
 import Search from './Search';
 
 export default [
@@ -11,7 +11,7 @@ export default [
         path="/chords"
         render={({match: {url}}) => (
             <>
-                <Route exact path={`${url}/`} component={View} />
+                <Route exact path={`${url}/`} component={Main} />
                 <Route path={`${url}/search`} component={Search} />
             </>
         )}
