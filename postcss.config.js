@@ -1,6 +1,1 @@
-module.exports = {
-    plugins: [
-        require('precss'),
-        require('autoprefixer')
-    ]
-}
+module.exports = { plugins: [require('@fronton/postcss-plugin').plugin] };

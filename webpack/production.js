@@ -29,8 +29,6 @@ module.exports = merge(require('./base'), {
 		new MiniCssExtractPlugin({
 			filename: '[name].[contenthash].css'
 		}),
-		require('@fronton/postcss-plugin').plugin,
-		require('autoprefixer'),
 	],
 	optimization: {
 		minimizer: [

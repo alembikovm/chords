@@ -16,6 +16,9 @@ class ChordsList extends React.Component {
             selectedIds: [],
             selectAll: false,
             items: props.chords.map((chord) => ({...chord, checked: false})),
+            itemsCount: props.chords.length,
+            itemsPerPage: 10,
+            currentPage: 1,
         };
     }
 
@@ -23,14 +26,14 @@ class ChordsList extends React.Component {
         this.setState((state) => {
             return {
                 selectAll: checked,
-                selectedIds: checked ? state.items.map(({_id}) => _id) : [],
+                selectedIds: checked ? state.items.map(({chordId}) => chordId) : [],
                 items: state.items.map((item) => ({...item, checked}))
             };
         });
     }
 
-    onItemCheckClickHandler = ({_id: itemId, checked}) => {
-        const itemIndex = this.state.items.findIndex(({_id}) => _id === itemId);
+    onItemCheckClickHandler = ({chordId, checked}) => {
+        const itemIndex = this.state.items.findIndex((chord) => chord.chordId === chordId);
         this.setState((state) => {
             const updatedItems = [...state.items];
             updatedItems[itemIndex].checked = checked;
@@ -40,13 +43,17 @@ class ChordsList extends React.Component {
 
         if (checked) {
             this.setState((state) => {
-                return {selectedIds: [...state.selectedIds, itemId]};
+                return {selectedIds: [...state.selectedIds, chordId]};
             });
         } else {
             this.setState((state) => {
-                return {selectedIds: [...state.selectedIds].filter((id) => id !== itemId)};
+                return {selectedIds: [...state.selectedIds].filter((id) => id !== chordId)};
             });
         }
+    }
+
+    onPaginationItemClick = (value) => {
+        this.setState({currentPage: value});
     }
 
     render() {
@@ -65,21 +72,22 @@ class ChordsList extends React.Component {
                         </ChordsSelectedText>
                     </ChordsListHeader>
                     <List
-                        items={this.state.items}
+                        items={this.state.items.slice(
+                            (this.state.currentPage - 1) * this.state.itemsPerPage,
+                            this.state.currentPage * this.state.itemsPerPage
+                        )}
                         onItemCheckClick={this.onItemCheckClickHandler}
                     />
                 </ChordsListMain>
                 <PaginationContainer>
                     <Pagination
-                        itemsCount={100}
-                        itemsPerPage={10}
-                        currentPage={1}
-                        hidePrev={true}
-                        hideNext={false}
+                        itemsCount={this.state.itemsCount}
+                        itemsPerPage={this.state.itemsPerPage}
+                        currentPage={this.state.currentPage}
                         prevText={"<"}
                         nextText={">"}
                         item={(value) =>
-                            <PaginationItem onClick={() => console.log('pagination')}>
+                            <PaginationItem onClick={() => this.onPaginationItemClick(value)}>
                                 {value}
                             </PaginationItem>
                         }

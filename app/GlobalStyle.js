@@ -25,6 +25,8 @@ export default createGlobalStyle`
     }
     
     table {
+      max-width: fit-content;
+      overflow-x: auto;
       border: none;
       border-spacing: 0px;
 
@@ -41,13 +43,24 @@ export default createGlobalStyle`
       }
       
       thead {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+        width: calc(100% - 1rem);
         th {
           border-bottom: 3px solid var(--control-secondary);
         }
       }
       
       tbody {
+        display: block;
+        overflow: auto;
+        max-height: 775px;
+        
         tr {
+          display: table;
+          width: 100%;
+          table-layout: fixed;
           border-radius: 8px;
 
           &:hover {

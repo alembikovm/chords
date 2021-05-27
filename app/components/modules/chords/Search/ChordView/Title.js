@@ -5,4 +5,8 @@ export default styled.div`
   font-size: 26px;
   line-height: 32px;
   color: #333;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 300px;
+  overflow: hidden;
 `;

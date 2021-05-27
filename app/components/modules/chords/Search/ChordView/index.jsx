@@ -20,10 +20,10 @@ class ChordView extends React.Component {
                 <ViewHeader>
                     <MainInfo>
                         <TitleContainer>
-                            <Title>ID {this.props.chord.id}</Title>
-                            <Type>{this.props.chord.type}</Type>
+                            <Title>ID {this.props.chord.chordId}</Title>
+                            <Type>{this.props.chord.chordType}</Type>
                         </TitleContainer>
-                        <Date style={{marginTop: '4px'}}>{this.props.chord.updatedDate}</Date>
+                        <Date style={{marginTop: '4px'}}>Сегодня, 12:31</Date>
                     </MainInfo>
                     <Actions>
                         <Button
@@ -61,7 +61,7 @@ class ChordView extends React.Component {
                     >
                         Добавить SKU
                     </Button>
-                    <Table />
+                    <Table chord={this.props.chord} />
                 </ViewMain>
             </ViewWrapper>
         );

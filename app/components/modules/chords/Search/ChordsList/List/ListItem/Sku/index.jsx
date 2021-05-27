@@ -8,9 +8,9 @@ function Sku({sku, type}) {
         <SkuContainer>
             <Text style={{marginRight: '17px'}}>
                 {'SKU в связке: '}
-                <span style={{color: 'var(--success-primary)'}}>{sku.active} SKU</span>/
-                <span style={{color: 'var(--accent-primary)'}}>{sku.withStocks} SKU</span>/
-                {sku.withoutStocks} SKU
+                <span style={{color: 'var(--success-primary)'}}>{sku.green} SKU</span>/
+                <span style={{color: 'var(--accent-primary)'}}>{sku.yellow} SKU</span>/
+                {sku.gray} SKU
             </Text>
             <Index title={type} />
         </SkuContainer>

@@ -11,28 +11,46 @@ import Text from "./Text";
 import ExampleContainer from "./ExampleContainer";
 import Name from "./Name";
 
-function ListItem({_id, id, type, sku, name, checked, onItemCheckClick}) {
+function ListItem({
+    chordId,
+    chordType,
+    baseEntity,
+    relatedEntities,
+    checked,
+    onItemCheckClick,
+}) {
+    const sku = relatedEntities.reduce((res, entity) => {
+        if (entity.avsTrigger === 'GREEN') return {...res, green: res.green + 1};
+        if (entity.avsTrigger === 'YELLOW') return {...res, yellow: res.yellow + 1};
+        if (entity.avsTrigger === 'GRAY') return {...res, gray: res.gray + 1};
+    }, {green: 0, yellow: 0, gray: 0});
+
     return (
         <ItemWrapper>
             <CheckboxContainer>
-                <Checkbox checked={checked} onChange={(value) => onItemCheckClick({_id, checked: value})} />
+                <Checkbox checked={checked} onChange={(value) => onItemCheckClick({chordId, checked: value})} />
             </CheckboxContainer>
             <MainContainer>
                 <Title>
                     <ItemId>
-                        ID {id}
+                        ID {chordId}
                     </ItemId>
                     <Type>
-                        {type}
+                        {chordType}
                     </Type>
                 </Title>
-                <Sku sku={sku} type={type} />
+                <Sku sku={sku} type={chordType} />
                 <Text>
                     Пример SKU в связке:
                 </Text>
                 <ExampleContainer>
-                    <img width="48px" height="48px" style={{marginRight: '12px'}} />
-                    <Name>{name}</Name>
+                    <img
+                        src={baseEntity.mainPhoto}
+                        width="48px"
+                        height="48px"
+                        style={{marginRight: '12px'}}
+                    />
+                    <Name>{baseEntity.name}</Name>
                 </ExampleContainer>
             </MainContainer>
         </ItemWrapper>

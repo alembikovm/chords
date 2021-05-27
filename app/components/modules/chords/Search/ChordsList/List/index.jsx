@@ -8,7 +8,7 @@ class List extends React.Component {
             <ListWrapper>
                 {this.props.items.map((item) => (
                     <ListItem
-                        key={item._id}
+                        key={item.chordId}
                         onItemCheckClick={this.props.onItemCheckClick}
                         {...item}
                     />

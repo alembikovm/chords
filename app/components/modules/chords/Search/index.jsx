@@ -2,7 +2,7 @@ import React from 'react'
 import Container from './Container';
 import ChordsList from './ChordsList';
 import ChordView from './ChordView';
-import chords from './items';
+import chords from './chords';
 
 class Search extends React.Component {
     constructor(props) {

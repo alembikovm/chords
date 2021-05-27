@@ -19,7 +19,6 @@ module.exports = merge(require('./base'), {
 							},
 						}
 					},
-					'postcss-loader',
 				]
 			}
 		]
