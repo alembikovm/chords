@@ -17,20 +17,25 @@ module.exports = {
 			{
 				test: /\.jsx?$/,
 				exclude: /node_modules/,
-				loader: 'babel-loader',
-				options: {
-					cacheDirectory: true,
-					plugins: [
-						[
-							"babel-plugin-styled-components",
-							{
-								ssr: false,
-								fileName: false,
-								displayName: isDevelopment,
-							},
-						],
-					],
-				},
+				use: [
+					{
+						loader: 'babel-loader',
+						options: {
+							cacheDirectory: true,
+							plugins: [
+								[
+									"babel-plugin-styled-components",
+									{
+										ssr: false,
+										fileName: false,
+										displayName: isDevelopment,
+									},
+								],
+							],
+						},
+					},
+					'astroturf/loader',
+				]
 			},
 		],
 	},

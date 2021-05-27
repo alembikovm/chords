@@ -18,7 +18,8 @@ module.exports = merge(require('./base'), {
 								localIdentName: `[local]_[hash:base64:10]`,
 							},
 						}
-					}
+					},
+					'postcss-loader',
 				]
 			}
 		]
