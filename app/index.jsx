@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
+import {BrowserRouter as Router} from 'react-router-dom';
 import { StyleSheetManager } from 'styled-components';
 import { ThemeProvider } from 'fronton-react';
 import GlobalStyle from './GlobalStyle';
@@ -15,9 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				<ThemeProvider>
 					<Router>
 						<Layout>
-							<Switch>
-								{screens}
-							</Switch>
+							{screens}
 						</Layout>
 					</Router>
 				</ThemeProvider>

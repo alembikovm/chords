@@ -7,6 +7,7 @@ module.exports = {
 	output: {
 		path: resolve('static', 'dist'),
 		filename: '[name].[contenthash].js',
+		publicPath: '/',
 	},
 	resolve: {
 		extensions: ['.js', '.jsx'],
