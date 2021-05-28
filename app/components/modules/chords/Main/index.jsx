@@ -124,9 +124,6 @@ class Chords extends React.Component {
                         }
                     />
                 </ContentWrapper>
-                <Route path="/chords/search">
-                    <Search />
-                </Route>
             </Container>
         );
     }
