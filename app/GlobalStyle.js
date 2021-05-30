@@ -10,6 +10,13 @@ export default createGlobalStyle`
 		margin: 0;
 	}
     
+    h2 {
+      font-weight: 500;
+      font-size: 26px;
+      line-height: 32px;
+      margin: 0px;
+    }
+    
     a {
       text-decoration: none;
       color: inherit;

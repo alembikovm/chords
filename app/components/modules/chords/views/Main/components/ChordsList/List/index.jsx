@@ -11,6 +11,7 @@ class List extends React.Component {
                         key={item.chordId}
                         onItemCheckClick={this.props.onItemCheckClick}
                         {...item}
+                        onClick={this.props.onItemClick(item.chordId)}
                     />
                 ))}
             </ListWrapper>
