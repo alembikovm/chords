@@ -1,5 +1,5 @@
 import React from 'react';
-import Index from "../../../../../../../common/Info";
+import Index from "../../../../../../../../../common/Info";
 import Text from "../Text";
 import SkuContainer from "./SkuContainer";
 

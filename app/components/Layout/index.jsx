@@ -1,5 +1,5 @@
 import React from 'react'
-import {Switch} from 'react-router-dom';
+import {Link as ReactRouterLink} from 'react-router-dom';
 import {Button} from 'fronton-react';
 import {PlusIcon} from 'fronton-react';
 import Layout from './Layout';
@@ -7,10 +7,6 @@ import Sidebar from './Sidebar';
 import Header from './Header';
 
 class LayoutWrapper extends React.Component {
-    onCreateChordHandler = () => {
-        console.log('create chord');
-    }
-
     render() {
         return (
             <Layout>
@@ -21,13 +17,14 @@ class LayoutWrapper extends React.Component {
                     <Layout.Header>
                         <Header>
                             <Button
+                                as={ReactRouterLink}
+                                to="/chords/main/create"
                                 kind="regular"
                                 size="m"
                                 variant="primary"
                                 iconLeft={
                                     <PlusIcon />
                                 }
-                                onClick={this.onCreateChordHandler}
                             >
                                 Создать связку
                             </Button>

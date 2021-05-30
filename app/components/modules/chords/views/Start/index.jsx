@@ -1,10 +1,9 @@
 import React from 'react';
-import {Link as ReactRouterLink, Route} from 'react-router-dom';
+import {Link as ReactRouterLink} from 'react-router-dom';
 import {Input, Button, Icon} from 'fronton-react';
 import { Dropdown, DropdownItem } from "fronton-react/unstable";
 import Container from './Container';
 import ContentWrapper from './ContentWrapper';
-import Search from "../Search";
 
 class Chords extends React.Component {
     constructor(props) {
@@ -111,7 +110,7 @@ class Chords extends React.Component {
                         endAdornment={
                             <Button
                                 as={ReactRouterLink}
-                                to="/chords/search"
+                                to="/chords/main"
                                 kind="regular"
                                 size="s"
                                 variant="primary"

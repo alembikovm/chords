@@ -1,6 +1,5 @@
 import React from "react";
 import {Button, PlusIcon} from "fronton-react";
-import ViewWrapper from "./ViewWrapper";
 import ViewHeader from "./ViewHeader";
 import MainInfo from "./MainInfo";
 import Title from "./Title";
@@ -8,15 +7,15 @@ import TitleContainer from "./TitleContainer";
 import Date from "./Date";
 import Type from "./Type";
 import Actions from "./Actions";
-import TrashIcon from "../../../../common/icons/TrashIcon";
-import EditIcon from "../../../../common/icons/EditIcon";
+import TrashIcon from "../../../../../../common/icons/TrashIcon";
+import EditIcon from "../../../../../../common/icons/EditIcon";
 import ViewMain from "./ViewMain";
-import Table from "./Table";
+import {ChordTable} from '../../components';
 
 class ChordView extends React.Component {
     render() {
         return (
-            <ViewWrapper>
+            <>
                 <ViewHeader>
                     <MainInfo>
                         <TitleContainer>
@@ -61,9 +60,9 @@ class ChordView extends React.Component {
                     >
                         Добавить SKU
                     </Button>
-                    <Table chord={this.props.chord} />
+                    <ChordTable chord={this.props.chord} />
                 </ViewMain>
-            </ViewWrapper>
+            </>
         );
     }
 }

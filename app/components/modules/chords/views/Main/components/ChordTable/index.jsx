@@ -1,7 +1,7 @@
 import React from "react";
 import {Counter} from 'fronton-react'
 import EntityInfoCell from "./EntityInfoCell";
-import Name from "../../ChordsList/List/ListItem/Name";
+import Name from "../ChordsList/List/ListItem/Name";
 
 class Table extends React.Component {
     constructor(props) {

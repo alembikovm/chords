@@ -1,4 +1,5 @@
 import React from 'react';
+import {Pagination, PaginationItem, Checkbox} from "fronton-react";
 import ChordsListWrapper from './ChordsListWrapper';
 import ChordsListHeader from './ChordsListHeader';
 import ChordsListMain from "./ChordsListMain";
@@ -6,8 +7,7 @@ import CheckboxContainer from "./CheckboxContainer";
 import ChordsSelectedText from "./ChordsSelectedText";
 import PaginationContainer from "./PaginationContainer";
 import List from './List';
-import {Pagination, PaginationItem} from "fronton-react";
-import {Checkbox} from 'fronton-react';
+
 
 class ChordsList extends React.Component {
     constructor(props) {
