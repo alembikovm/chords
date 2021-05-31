@@ -11,6 +11,12 @@ class Table extends React.Component {
         }
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.chord.chordId !== this.props.chord.chordId) {
+            this.setState({entities: this.props.chord.relatedEntities});
+        }
+    }
+
     onQuantityChangeHandler = ({entityId, value}) => {
         this.setState((state) => {
            const entityIndex = state.entities.findIndex((entity) => entity.entityId === entityId);

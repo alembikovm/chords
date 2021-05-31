@@ -1,11 +1,7 @@
 import React from 'react';
-import {Link as ReactRouterLink} from 'react-router-dom';
-import {Input, Button, Icon} from 'fronton-react';
-import { Dropdown, DropdownItem } from "fronton-react/unstable";
 import Container from './Container';
 import ContentWrapper from './ContentWrapper';
-import SearchIcon from '../../../../common/icons/SearchIcon';
-import {SearchString} from '../../../../common';
+import {SearchString, Dropdown} from '../../../../common';
 
 class Chords extends React.Component {
     constructor(props) {
@@ -61,34 +57,20 @@ class Chords extends React.Component {
                         Для поиска связки выбери ее тип и критерий поиска
                     </div>
                     <Dropdown
-                        size="m"
                         placeholder="Выберите тип связки"
                         value={this.state.chordType}
-                    >
-                        {chordsItems.map(
-                            ({id, value}) =>
-                                (
-                                    <DropdownItem
-                                        size="m"
-                                        key={id}
-                                        id={id}
-                                        value={value}
-                                        onChange={this.onChangeChordTypeHandler}
-                                    >
-                                        {value}
-                                    </DropdownItem>
-                                )
-                        )}
-                    </Dropdown>
+                        items={chordsItems}
+                        onChange={this.onChangeChordTypeHandler}
+                    />
                     <SearchString
                         value={this.state.searchString}
-                        onChange={this.onChangeSearchString}
                         placeholder="Введи SKU"
                         disabled={this.state.disableSearch}
                         dropdownValue={this.state.searchBy}
                         dropdownItems={searchByItems}
-                        onDropdownChange={this.onChangeSearchBy}
                         to='/chords/main'
+                        onDropdownChange={this.onChangeSearchBy}
+                        onChange={this.onChangeSearchString}
                         onSearch={this.onSearchHandler}
                     />
                 </ContentWrapper>

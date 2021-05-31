@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Input} from 'fronton-react';
-import {Dropdown, DropdownItem} from 'fronton-react/unstable';
+import {Dropdown} from '../../../../../../common';
 import {ChordTable} from '../../components';
 import CreateWrapper from './CreateWrapper';
 import FormGroup from './FormGroup';
@@ -11,6 +11,8 @@ function Create() {
     const [chord, setChord] = useState({
         relatedEntities: [],
     });
+    const [isChordTypeSelected, setIsChordTypeSelected] = useState(false);
+    const [searchString, setSearchString] = useState('');
 
     const chordsItems = [
         {id: 1, value: 'Компоненты'},
@@ -20,7 +22,12 @@ function Create() {
         {id: 5, value: 'Замена'},
     ];
 
+    const onChangeSearchString = (event) => {
+        setSearchString(event.target.value);
+    }
+
     const onChangeChordTypeHandler = (event) => {
+        setIsChordTypeSelected(true);
         setChordType(event.target.value);
     }
 
@@ -29,33 +36,25 @@ function Create() {
             <h2>Создание связки</h2>
             <FormGroup>
                 <Dropdown
-                    size="m"
                     placeholder="Выберите тип связки"
                     label='Тип связки'
                     value={chordType}
-                >
-                    {chordsItems.map(
-                        ({id, value}) =>
-                            (
-                                <DropdownItem
-                                    size="m"
-                                    key={id}
-                                    id={id}
-                                    value={value}
-                                    onChange={onChangeChordTypeHandler}
-                                >
-                                    {value}
-                                </DropdownItem>
-                            )
-                    )}
-                </Dropdown>
-                <Input
-                    inputSize='m'
-                    label='Поиск SKU'
-                    placeholder='Введите SKU, чтобы добавить в связку'
+                    items={chordsItems}
+                    onChange={onChangeChordTypeHandler}
                 />
+                {isChordTypeSelected && (
+                    <Input
+                        inputSize='m'
+                        label='Поиск SKU'
+                        placeholder='Введите SKU, чтобы добавить в связку'
+                        value={searchString}
+                        onChange={onChangeSearchString}
+                    />
+                )}
             </FormGroup>
-            <ChordTable chord={chord} />
+            {isChordTypeSelected && (
+                <ChordTable chord={chord} />
+            )}
             <FooterButtons />
         </CreateWrapper>
     );

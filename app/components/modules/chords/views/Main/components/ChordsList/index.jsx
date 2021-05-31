@@ -51,10 +51,6 @@ class ChordsList extends React.Component {
         }
     }
 
-    onItemClickHandler = (chordId) => {
-        console.log(`on item click, ID: ${chordId }`);
-    }
-
     onPaginationItemClick = (value) => {
         this.setState({currentPage: value});
     }
@@ -80,7 +76,7 @@ class ChordsList extends React.Component {
                             this.state.currentPage * this.state.itemsPerPage
                         )}
                         onItemCheckClick={this.onItemCheckClickHandler}
-                        onItemClick={this.onItemClickHandler}
+                        onItemClick={this.props.onItemClick}
                     />
                 </ChordsListMain>
                 <PaginationContainer>

@@ -13,6 +13,10 @@ import ViewMain from "./ViewMain";
 import {ChordTable} from '../../components';
 
 class ChordView extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
             <>

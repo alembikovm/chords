@@ -18,6 +18,7 @@ function ListItem({
     relatedEntities,
     checked,
     onItemCheckClick,
+    onClick,
 }) {
     const sku = relatedEntities.reduce((res, entity) => {
         if (entity.avsTrigger === 'GREEN') return {...res, green: res.green + 1};
@@ -26,7 +27,7 @@ function ListItem({
     }, {green: 0, yellow: 0, gray: 0});
 
     return (
-        <ItemWrapper>
+        <ItemWrapper onClick={onClick}>
             <CheckboxContainer>
                 <Checkbox checked={checked} onChange={(value) => onItemCheckClick({chordId, checked: value})} />
             </CheckboxContainer>
