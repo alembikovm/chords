@@ -1,7 +1,6 @@
 import React from 'react'
-import {Link as ReactRouterLink} from 'react-router-dom';
-import {Button} from 'fronton-react';
-import {PlusIcon} from 'fronton-react';
+import {Route} from 'react-router-dom';
+import ChordsHeader from '../modules/chords/components/ChordsHeader';
 import Layout from './Layout';
 import Sidebar from './Sidebar';
 import Header from './Header';
@@ -16,18 +15,9 @@ class LayoutWrapper extends React.Component {
                 <Layout.Main>
                     <Layout.Header>
                         <Header>
-                            <Button
-                                as={ReactRouterLink}
-                                to="/chords/main/create"
-                                kind="regular"
-                                size="m"
-                                variant="primary"
-                                iconLeft={
-                                    <PlusIcon />
-                                }
-                            >
-                                Создать связку
-                            </Button>
+                            <Route path='/chords/main'>
+                                <ChordsHeader />
+                            </Route>
                         </Header>
                     </Layout.Header>
                     <Layout.Content>
