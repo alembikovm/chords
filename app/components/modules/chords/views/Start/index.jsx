@@ -4,6 +4,8 @@ import {Input, Button, Icon} from 'fronton-react';
 import { Dropdown, DropdownItem } from "fronton-react/unstable";
 import Container from './Container';
 import ContentWrapper from './ContentWrapper';
+import SearchIcon from '../../../../common/icons/SearchIcon';
+import {SearchString} from '../../../../common';
 
 class Chords extends React.Component {
     constructor(props) {
@@ -78,49 +80,16 @@ class Chords extends React.Component {
                                 )
                         )}
                     </Dropdown>
-                    <Input
+                    <SearchString
                         value={this.state.searchString}
                         onChange={this.onChangeSearchString}
                         placeholder="Введи SKU"
-                        inputSize="m"
-                        allowClear
                         disabled={this.state.disableSearch}
-                        startAdornment={
-                            <Dropdown
-                                size="s"
-                                value={this.state.searchBy}
-                                disabled={this.state.disableSearch}
-                            >
-                                {searchByItems.map(
-                                    ({id, value}) =>
-                                        (
-                                            <DropdownItem
-                                                size="m"
-                                                key={id}
-                                                id={id}
-                                                value={value}
-                                                onChange={this.onChangeSearchBy}
-                                            >
-                                                {value}
-                                            </DropdownItem>
-                                        )
-                                )}
-                            </Dropdown>
-                        }
-                        endAdornment={
-                            <Button
-                                as={ReactRouterLink}
-                                to="/chords/main"
-                                kind="regular"
-                                size="s"
-                                variant="primary"
-                                iconOnly
-                                disabled={this.state.disableSearch}
-                                onClick={this.onSearchHandler}
-                            >
-                                <Icon name="search" size="s" />
-                            </Button>
-                        }
+                        dropdownValue={this.state.searchBy}
+                        dropdownItems={searchByItems}
+                        onDropdownChange={this.onChangeSearchBy}
+                        to='/chords/main'
+                        onSearch={this.onSearchHandler}
                     />
                 </ContentWrapper>
             </Container>

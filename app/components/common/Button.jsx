@@ -1,16 +1,16 @@
 import React from 'react';
-import {Button as FrontonButton} from 'fronton-react';
+import {Button as ButtonFronton} from 'fronton-react';
 
 function Button(props) {
     return (
-        <FrontonButton
-            kind="regular"
-            size="m"
-            variant="primary"
+        <ButtonFronton
+            kind='regular'
+            size='m'
+            variant='primary'
             {...props}
         >
             {props.children}
-        </FrontonButton>
+        </ButtonFronton>
     );
 }
 

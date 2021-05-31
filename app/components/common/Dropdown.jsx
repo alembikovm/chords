@@ -1,15 +1,23 @@
 import React from 'react';
-import {Dropdown as FrontonDropdown, DropdownItem} from 'fronton-react/unstable';
+import {Dropdown as DropdownFronton, DropdownItem} from 'fronton-react/unstable';
 
-function Dropdown({options, ...props}) {
+function Dropdown(props) {
     return (
-        <FrontonDropdown size="m" {...props}>
-            {options.map(({id, value}) => (
-                <DropdownItem id={id} key={id}>
+        <DropdownFronton
+            size='m'
+            {...props}
+        >
+            {props.items.map(({id, value}) =>(
+                <DropdownItem
+                    key={id}
+                    id={id}
+                    value={value}
+                    onChange={props.onChange}
+                >
                     {value}
                 </DropdownItem>
             ))}
-        </FrontonDropdown>
+        </DropdownFronton>
     );
 }
 
