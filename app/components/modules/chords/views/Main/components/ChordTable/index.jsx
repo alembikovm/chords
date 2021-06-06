@@ -1,74 +1,76 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {Counter} from 'fronton-react'
 import EntityInfoCell from "./EntityInfoCell";
 import Name from "../ChordsList/List/ListItem/Name";
 
-class Table extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            entities: props.chord.relatedEntities,
-        }
-    }
+function Table({chord}) {
+    const [entities, setEntities] = useState([]);
 
-    componentDidUpdate(prevProps) {
-        if (prevProps.chord.chordId !== this.props.chord.chordId) {
-            this.setState({entities: this.props.chord.relatedEntities});
-        }
-    }
-
-    onQuantityChangeHandler = ({entityId, value}) => {
-        this.setState((state) => {
-           const entityIndex = state.entities.findIndex((entity) => entity.entityId === entityId);
-           let entities = [...state.entities];
-            entities[entityIndex].quantity = value;
-
-           return {entities};
-        });
-    }
-
-    render() {
-        return (
-            <table>
-                <thead>
-                <tr>
-                    <th width="100px">SKU</th>
-                    <th width="340px">Название</th>
-                    <th width="180px">Главный SKU</th>
-                    <th width="180px">Кол-во</th>
-                </tr>
-                </thead>
-                <tbody>
-                {this.state.entities.map(({entityId, name, mainPhoto, quantity}) => (
-                    <tr key={entityId}>
-                        <td valign="top" width="100px">{entityId}</td>
-                        <EntityInfoCell>
-                            <img
-                                src={mainPhoto}
-                                width="48px"
-                                height="48px"
-                                style={{marginRight: '12px'}}
-                            />
-                            <Name>{name}</Name>
-                        </EntityInfoCell>
-                        <td width="180px">{entityId === this.props.chord.baseEntity.entityId ? 'TRUE' : 'FALSE'}</td>
-                        <td width="180px">
-                            <Counter
-                                value={quantity}
-                                size="s"
-                                step={1}
-                                onChange={(event) => this.onQuantityChangeHandler({
-                                    entityId,
-                                    value: event.target.value
-                                })}
-                            />
-                        </td>
-                    </tr>
-                ))}
-                </tbody>
-            </table>
+    useEffect(() => {
+        const baseEntityIndex = chord.relatedEntities.findIndex(
+            (entity) => {
+                console.log(entity.entityId, chord.baseEntity.entityId);
+                return entity.entityId === chord.baseEntity.entityId
+            }
         );
-    }
+        console.log(baseEntityIndex);
+        const baseEntity = {...chord.relatedEntities[baseEntityIndex]};
+
+        setEntities([
+            baseEntity,
+            ...chord.relatedEntities.filter((entity) => entity.entityId !== baseEntity.entityId)
+        ]);
+    }, [chord]);
+
+    const onQuantityChangeHandler = ({entityId, value}) => {
+        const entityIndex = entities.findIndex((entity) => entity.entityId === entityId);
+
+        let updatedEntities = [...entities];
+        updatedEntities[entityIndex].quantity = value;
+
+        setEntities(updatedEntities);
+    };
+
+    return (
+        <table>
+            <thead>
+            <tr>
+                <th width="100px">SKU</th>
+                <th width="340px">Название</th>
+                <th width="180px">Главный SKU</th>
+                <th width="180px">Кол-во</th>
+            </tr>
+            </thead>
+            <tbody>
+            {entities.map(({entityId, name, mainPhoto, quantity}) => (
+                <tr key={entityId}>
+                    <td valign="top" width="100px">{entityId}</td>
+                    <EntityInfoCell>
+                        <img
+                            src={mainPhoto}
+                            width="48px"
+                            height="48px"
+                            style={{marginRight: '12px'}}
+                        />
+                        <Name>{name}</Name>
+                    </EntityInfoCell>
+                    <td width="180px">{entityId === chord.baseEntity.entityId ? 'TRUE' : 'FALSE'}</td>
+                    <td width="180px">
+                        <Counter
+                            value={quantity}
+                            size="s"
+                            step={1}
+                            onChange={(event) => onQuantityChangeHandler({
+                                entityId,
+                                value: event.target.value
+                            })}
+                        />
+                    </td>
+                </tr>
+            ))}
+            </tbody>
+        </table>
+    );
 }
 
 export default Table;

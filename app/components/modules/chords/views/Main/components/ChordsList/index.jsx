@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {Pagination, PaginationItem, Checkbox} from "fronton-react";
 import ChordsListWrapper from './ChordsListWrapper';
 import ChordsListHeader from './ChordsListHeader';
@@ -8,94 +8,91 @@ import ChordsSelectedText from "./ChordsSelectedText";
 import PaginationContainer from "./PaginationContainer";
 import List from './List';
 
-class ChordsList extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            selectedIds: [],
-            selectAll: false,
-            items: props.chords.map((chord) => ({...chord, checked: false})),
-            itemsCount: props.chords.length,
-            itemsPerPage: 10,
-            currentPage: 1,
-        };
-    }
+function ChordsList(props) {
+    const [selectedIds, setSelectedIds] = useState([]);
+    const [selectAll, setSelectAll] = useState(false);
+    const [items, setItems] = useState([]);
+    const [itemsCount, setCount] = useState(0);
+    const [itemsPerPage, setItemsPerPage] = useState(10);
+    const [currentPage, setCurrentPage] = useState(1);
 
-    onCheckAllItemsClickHandler = (checked) => {
-        this.setState((state) => {
-            return {
-                selectAll: checked,
-                selectedIds: checked ? state.items.map(({chordId}) => chordId) : [],
-                items: state.items.map((item) => ({...item, checked}))
-            };
-        });
-    }
+    const onCheckAllItemsClickHandler = (checked) => {
+        setSelectAll(checked);
+        setSelectedIds(checked ? items.map(({chordId}) => chordId) : [],);
+        setItems(items.map((item) => ({...item, checked})));
+    };
 
-    onItemCheckClickHandler = ({chordId, checked}) => {
-        const itemIndex = this.state.items.findIndex((chord) => chord.chordId === chordId);
-        this.setState((state) => {
-            const updatedItems = [...state.items];
-            updatedItems[itemIndex].checked = checked;
+    const onItemCheckClickHandler = ({chordId, checked}) => {
+        const itemIndex = items.findIndex((chord) => chord.chordId === chordId);
 
-            return {items: updatedItems};
-        });
+        const updatedItems = [...items];
+        updatedItems[itemIndex].checked = checked;
 
-        if (checked) {
-            this.setState((state) => {
-                return {selectedIds: [...state.selectedIds, chordId]};
-            });
-        } else {
-            this.setState((state) => {
-                return {selectedIds: [...state.selectedIds].filter((id) => id !== chordId)};
-            });
-        }
-    }
+        setItems(updatedItems);
 
-    onPaginationItemClick = (value) => {
-        this.setState({currentPage: value});
-    }
+        setSelectedIds(
+            checked
+                ? [...selectedIds, chordId]
+                : [...selectedIds].filter((id) => id !== chordId)
+        );
+    };
 
-    render() {
-        return (
-            <ChordsListWrapper>
-                <ChordsListMain>
-                    <ChordsListHeader>
+    const onPaginationItemClick = (value) => {
+        setCurrentPage(value);
+    };
+
+    useEffect(() => {
+        setItems(props.chords.map((chord) => ({...chord, checked: false})));
+        setCount(props.chords.length)
+    }, [props.chords]);
+
+    return (
+        <ChordsListWrapper>
+            <ChordsListMain>
+                <ChordsListHeader>
+                    <div style={{display: 'flex', alignItems: 'center'}}>
                         <CheckboxContainer>
                             <Checkbox
-                                checked={this.state.selectAll}
-                                onChange={this.onCheckAllItemsClickHandler}
+                                checked={selectAll}
+                                onChange={onCheckAllItemsClickHandler}
                             />
                         </CheckboxContainer>
                         <ChordsSelectedText>
-                            {this.state.selectedIds.length} связок выбрано
+                            {selectedIds.length} связок выбрано
                         </ChordsSelectedText>
-                    </ChordsListHeader>
-                    <List
-                        items={this.state.items.slice(
-                            (this.state.currentPage - 1) * this.state.itemsPerPage,
-                            this.state.currentPage * this.state.itemsPerPage
-                        )}
-                        onItemCheckClick={this.onItemCheckClickHandler}
-                        onItemClick={this.props.onItemClick}
-                    />
-                </ChordsListMain>
-                <PaginationContainer>
-                    <Pagination
-                        itemsCount={this.state.itemsCount}
-                        itemsPerPage={this.state.itemsPerPage}
-                        currentPage={this.state.currentPage}
-                        prevText={"<"}
-                        nextText={">"}
-                        item={(value) =>
-                            <PaginationItem onClick={() => this.onPaginationItemClick(value)}>
-                                {value}
-                            </PaginationItem>
-                        }
-                    />
-                </PaginationContainer>
-            </ChordsListWrapper>
-        );
-    }
+                    </div>
+                    <div>
+                        <ChordsSelectedText color='var(--success-primary)'>
+                            {items.length} связок найдено
+                        </ChordsSelectedText>
+                    </div>
+                </ChordsListHeader>
+                <List
+                    items={items.slice(
+                        (currentPage - 1) * itemsPerPage,
+                        currentPage * itemsPerPage
+                    )}
+                    onItemCheckClick={onItemCheckClickHandler}
+                    onItemClick={props.onItemClick}
+                    loading={props.loading}
+                />
+            </ChordsListMain>
+            <PaginationContainer>
+                <Pagination
+                    itemsCount={itemsCount}
+                    itemsPerPage={itemsPerPage}
+                    currentPage={currentPage}
+                    prevText={"<"}
+                    nextText={">"}
+                    item={(value) =>
+                        <PaginationItem onClick={() => onPaginationItemClick(value)}>
+                            {value}
+                        </PaginationItem>
+                    }
+                />
+            </PaginationContainer>
+        </ChordsListWrapper>
+    );
 }
 
 export default ChordsList;

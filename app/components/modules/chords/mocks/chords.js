@@ -2,7 +2,7 @@ export default [
     {
         "chordId": "0e60e898-7f35-423b-9dc7-f89afe6d6229",
         "baseEntity": {
-            "entityId": "10072745",
+            "entityId": "10042538",
             "entityType": "PRODUCT",
             "quantity": 1,
             "name": "Гипсокартон влагостойкий 12.5 мм Knauf 2500х1200 мм 3 м²",

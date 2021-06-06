@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {BrowserRouter as Router} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import { StyleSheetManager } from 'styled-components';
-import { ThemeProvider } from 'fronton-react';
+import { ThemeProvider, SnackbarProvider } from 'fronton-react';
 import GlobalStyle from './GlobalStyle';
 import Layout from './components/Layout';
 import screens from './screens';
@@ -15,11 +15,13 @@ document.addEventListener('DOMContentLoaded', () => {
 			<Provider store={store}>
 				<GlobalStyle />
 				<ThemeProvider>
-					<Router>
-						<Layout>
-							{screens}
-						</Layout>
-					</Router>
+					<SnackbarProvider>
+						<Router>
+							<Layout>
+								{screens}
+							</Layout>
+						</Router>
+					</SnackbarProvider>
 				</ThemeProvider>
 			</Provider>
 		</StyleSheetManager>,

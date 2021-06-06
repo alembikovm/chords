@@ -5,5 +5,5 @@ export default styled.div`
   font-size: 12px;
   line-height: 16px;
   text-transform: uppercase;
-  color: #999999;
+  color: ${props => props.color || 'var(--text-minor)'};
 `;
