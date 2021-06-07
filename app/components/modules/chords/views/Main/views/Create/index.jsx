@@ -24,12 +24,12 @@ function Create() {
 
     const onChangeSearchString = (event) => {
         setSearchString(event.target.value);
-    }
+    };
 
     const onChangeChordTypeHandler = (event) => {
         setIsChordTypeSelected(true);
         setChordType(event.target.value);
-    }
+    };
 
     return (
         <CreateWrapper>

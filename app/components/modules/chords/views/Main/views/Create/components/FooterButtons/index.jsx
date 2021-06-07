@@ -9,7 +9,7 @@ function FooterButtons(props) {
                 kind="regular"
                 size="m"
                 variant="secondary"
-                onClick={props.onCancelClick}
+                onClick={props.onCancel}
             >
                 Отменить
             </Button>
@@ -17,7 +17,7 @@ function FooterButtons(props) {
                 kind="regular"
                 size="m"
                 variant="primary"
-                onClick={props.onSaveClick}
+                onClick={props.onSave}
             >
                 Сохранить изменения
             </Button>

@@ -117,25 +117,6 @@ function Main() {
                 </GridItem>
             </Grid>
         </Container>
-        // <Container>
-        //     <ChordsList
-        //         chords={chords}
-        //         onItemClick={onListItemClickHandler}
-        //         loading={loading}
-        //     />
-        //     <ViewContainer>
-        //         {!loading && (
-        //             <>
-        //                 <Route exact path={`/chords/main`}>
-        //                     <View chord={selectedChord} />
-        //                 </Route>
-        //                 <Route path={`/chords/main/create`}>
-        //                     <Create />
-        //                 </Route>
-        //             </>
-        //         )}
-        //     </ViewContainer>
-        // </Container>
     );
 }
 
