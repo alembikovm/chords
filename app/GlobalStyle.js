@@ -70,8 +70,16 @@ export default createGlobalStyle`
           table-layout: fixed;
           border-radius: 8px;
 
+          .iconTrash {
+            display: none;
+          }
+          
           &:hover {
             background-color: var(--background-secondary);
+            
+            .iconTrash {
+              display: block;
+            }
             
             td {
               &:first-child {

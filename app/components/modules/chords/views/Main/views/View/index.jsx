@@ -39,7 +39,6 @@ function ChordView(props) {
 
     const onCancelEditHandler = (event) => {
         setEdit(false);
-        setChord(event.target.value);
     };
 
     const onAddSkuHandler = () => {
@@ -104,16 +103,18 @@ function ChordView(props) {
                     </ViewHeader>
                 )}
                 <ViewMain>
-                    <Button
-                        kind="regular"
-                        size="m"
-                        variant="secondary"
-                        iconLeft={<PlusIcon />}
-                        onClick={onAddSkuHandler}
-                        style={{alignSelf: 'start', marginBottom: '7px'}}
-                    >
-                        Добавить SKU
-                    </Button>
+                    {!isEdit && (
+                        <Button
+                            kind="regular"
+                            size="m"
+                            variant="secondary"
+                            iconLeft={<PlusIcon />}
+                            onClick={onAddSkuHandler}
+                            style={{alignSelf: 'start', marginBottom: '7px'}}
+                        >
+                            Добавить SKU
+                        </Button>
+                    )}
                     <ChordTable chord={chord} onChange={onTableChange} />
                     {isEdit && <FooterButtons onSave={onSaveEditHandler} onCancel={onCancelEditHandler} />}
                 </ViewMain>

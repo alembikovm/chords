@@ -2,8 +2,11 @@ import React, { useState, useEffect } from "react";
 import {Counter} from 'fronton-react'
 import EntityInfoCell from "./EntityInfoCell";
 import Name from "../ChordsList/List/ListItem/Name";
+import TrashIcon from "../../../../../../common/icons/TrashIcon";
+import TrashIconWrapper from "./TrashIconWrapper";
+import LastCell from "./LastCell";
 
-function Table({chord}) {
+function Table({chord, onChange}) {
     const [entities, setEntities] = useState([]);
 
     useEffect(() => {
@@ -56,15 +59,23 @@ function Table({chord}) {
                     </EntityInfoCell>
                     <td width="180px">{entityId === chord.baseEntity.entityId ? 'TRUE' : 'FALSE'}</td>
                     <td width="180px">
-                        <Counter
-                            value={quantity}
-                            size="s"
-                            step={1}
-                            onChange={(event) => onQuantityChangeHandler({
-                                entityId,
-                                value: event.target.value
-                            })}
-                        />
+                        <LastCell>
+                            <Counter
+                                value={quantity}
+                                size="s"
+                                step={1}
+                                onChange={(event) => {
+                                    onChange();
+                                    onQuantityChangeHandler({
+                                        entityId,
+                                        value: event.target.value
+                                    });
+                                }}
+                            />
+                            <TrashIconWrapper>
+                                <TrashIcon width="11.67px" height="15px" className='iconTrash' />
+                            </TrashIconWrapper>
+                        </LastCell>
                     </td>
                 </tr>
             ))}

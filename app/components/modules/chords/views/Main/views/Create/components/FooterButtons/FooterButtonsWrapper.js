@@ -10,4 +10,5 @@ export default styled.div`
   bottom: 0px;
   left: 0px;
   right: 0px;
+  background-color: var(--background-primary);
 `;
