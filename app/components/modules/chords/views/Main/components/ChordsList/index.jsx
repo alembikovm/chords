@@ -7,6 +7,9 @@ import CheckboxContainer from "./CheckboxContainer";
 import ChordsSelectedText from "./ChordsSelectedText";
 import PaginationContainer from "./PaginationContainer";
 import List from './List';
+import {Button} from "../../../../../../common";
+import DownloadIcon from "../../../../../../common/icons/DownloadIcon";
+import TrashIcon from "../../../../../../common/icons/TrashIcon";
 
 function ChordsList(props) {
     const [selectedIds, setSelectedIds] = useState([]);
@@ -60,6 +63,22 @@ function ChordsList(props) {
                         <ChordsSelectedText>
                             {selectedIds.length} связок выбрано
                         </ChordsSelectedText>
+                        <Button kind="icon" size='s' style={{marginLeft: '12px'}} iconOnly disabled>
+                            <DownloadIcon />
+                        </Button>
+                        <Button
+                            kind="icon"
+                            size='s'
+                            style={{marginLeft: '12px'}}
+                            disabled={!selectedIds.length}
+                            onClick={async () => {
+                                await props.onDeleteByIds(selectedIds);
+                                setSelectedIds([]);
+                            }}
+                            iconOnly
+                        >
+                            <TrashIcon />
+                        </Button>
                     </div>
                     <div>
                         <ChordsSelectedText color='var(--success-primary)'>

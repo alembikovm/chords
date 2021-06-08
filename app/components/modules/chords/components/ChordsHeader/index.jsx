@@ -8,8 +8,7 @@ import {Button, Dropdown, SearchString} from '../../../../common';
 import ChordsHeaderWrapper from './ChordsHeaderWrapper';
 import useSearchString from '../../../../../hooks/useSearchString';
 
-function ChordsHeader() {
-    const dispatch = useDispatch();
+function ChordsHeader(props) {
     const {
         chordsItems,
         searchByItems,
@@ -21,10 +20,6 @@ function ChordsHeader() {
         onChangeSearchString,
         onChangeSearchBy,
     } = useSearchString();
-
-    const onFiltersClick = () => {
-        dispatch(toggleShowFilters());
-    };
 
     const onSearchHandler = () => {
         console.log('Search...');
@@ -40,7 +35,7 @@ function ChordsHeader() {
                     onChange={onChangeChordTypeHandler}
                 />
             </div>
-            <div style={{maxWidth: '412px', width: '100%'}}>
+            <div style={{maxWidth: '412px', minWidth: '300px'}}>
                 <SearchString
                     value={searchString}
                     placeholder="Введи SKU"
@@ -57,7 +52,7 @@ function ChordsHeader() {
                 iconLeft={<FilterIcon />}
                 variant='pseudo'
                 disabled={disableSearch}
-                onClick={onFiltersClick}
+                onClick={props.onFilterClick}
             >
                 Фильтр
             </Button>

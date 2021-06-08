@@ -13,13 +13,13 @@ class LayoutWrapper extends React.Component {
                     <Sidebar/>
                 </Layout.Sidebar>
                 <Layout.Main>
-                    <Layout.Header>
-                        <Header>
-                            <Route path='/chords/main'>
-                                <ChordsHeader />
-                            </Route>
-                        </Header>
-                    </Layout.Header>
+                    {/*<Layout.Header>*/}
+                    {/*    <Header>*/}
+                    {/*        <Route path='/chords/main'>*/}
+                    {/*            <ChordsHeader />*/}
+                    {/*        </Route>*/}
+                    {/*    </Header>*/}
+                    {/*</Layout.Header>*/}
                     <Layout.Content>
                         {this.props.children}
                     </Layout.Content>

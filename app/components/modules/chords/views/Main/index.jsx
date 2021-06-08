@@ -6,6 +6,10 @@ import Container from './Container';
 import {ChordsList} from './components';
 import {Create, View} from './views';
 import ColorBlock from "./ColorBlock";
+import HeaderContainer from "./HeaderContainer";
+import FiltersContainer from "./FiltersContainer";
+import ChordsHeader from "../../components/ChordsHeader";
+import Filters from "./components/Filters";
 
 function Main() {
     const {state: snackbarState, addSnack} = useSnackbar();
@@ -14,6 +18,7 @@ function Main() {
     const [selectedChord, setSelectedChord] = useState(null);
     const location = useLocation();
     const history = useHistory();
+    const [showFilters, setShowFilters] = useState(false);
 
     const onListItemClickHandler = (chordId) => {
         if (location.pathname !== '/chords/main') {
@@ -25,7 +30,6 @@ function Main() {
     }
 
     const onDeleteChordHandler = async (chordId) => {
-        console.log('delete start');
         let snack = {
             id: 'onDeleteChordSnack',
             title: 'Связка успешно удалена',
@@ -47,7 +51,6 @@ function Main() {
         } finally {
             addSnack(snack);
         }
-        console.log('delete end');
     }
 
     useEffect(() => {
@@ -70,9 +73,37 @@ function Main() {
       fetchChords();
     }, []);
 
+    const onFilterClickHandler = () => setShowFilters(!showFilters);
+
+    const onDeleteByIds = async (selectedIds) => {
+        let snack = {
+            id: 'onDeleteChordSnack',
+            title: 'Связки успешно удалены',
+            type: 'success',
+            time: true,
+        };
+
+        try {
+            const response = await axios.delete('https://run.mocky.io/v3/1ebf42f8-041c-4dbf-848c-3c55570f5e5e');
+            //const chords = response.data;
+            const updatedChords = chords.filter((chord) => !selectedIds.includes(chord.chordId));
+
+            setChords(updatedChords);
+            setSelectedChord(chords[0]);
+        } catch (error) {
+            snack = {
+                ...snack,
+                title: 'Ошибка удаления связок',
+                type: 'danger',
+            }
+        } finally {
+            addSnack(snack);
+        }
+    }
+
     return (
         <Container>
-            <Snackbar verticalPosition='top' horizontalPosition='end'>
+            <Snackbar>
                 {snackbarState.map(({ id, title, type, time }) => (
                     <Snack
                         key={id}
@@ -88,17 +119,25 @@ function Main() {
                 'filters filters filters',
                 'list view view'
             ]}>
-                {/*<GridItem area='header'>*/}
-                {/*    <ChordsHeader />*/}
-                {/*</GridItem>*/}
-                {/*<GridItem area='filters'>*/}
-                {/*    FILTERS*/}
-                {/*</GridItem>*/}
+                <GridItem area='header'>
+                    <HeaderContainer>
+                        <div>Связки</div>
+                        <ChordsHeader onFilterClick={onFilterClickHandler} />
+                    </HeaderContainer>
+                </GridItem>
+                <GridItem area='filters'>
+                    {showFilters && (
+                        <FiltersContainer>
+                            <Filters />
+                        </FiltersContainer>
+                    )}
+                </GridItem>
                 <GridItem area='list'>
                     <ChordsList
                         chords={chords}
                         onItemClick={onListItemClickHandler}
                         loading={loading}
+                        onDeleteByIds={onDeleteByIds}
                     />
                 </GridItem>
                 <GridItem area='view'>

@@ -5,24 +5,26 @@ import Name from "../ChordsList/List/ListItem/Name";
 import TrashIcon from "../../../../../../common/icons/TrashIcon";
 import TrashIconWrapper from "./TrashIconWrapper";
 import LastCell from "./LastCell";
+import {Button} from "../../../../../../common";
 
 function Table({chord, onChange}) {
     const [entities, setEntities] = useState([]);
 
     useEffect(() => {
-        const baseEntityIndex = chord.relatedEntities.findIndex(
-            (entity) => {
-                console.log(entity.entityId, chord.baseEntity.entityId);
-                return entity.entityId === chord.baseEntity.entityId
-            }
-        );
-        console.log(baseEntityIndex);
-        const baseEntity = {...chord.relatedEntities[baseEntityIndex]};
+        if (chord.relatedEntities.length) {
+            const baseEntityIndex = chord.relatedEntities.findIndex(
+                (entity) => entity.entityId === chord.baseEntity.entityId
+            );
 
-        setEntities([
-            baseEntity,
-            ...chord.relatedEntities.filter((entity) => entity.entityId !== baseEntity.entityId)
-        ]);
+            const baseEntity = {...chord.relatedEntities[baseEntityIndex]};
+
+            setEntities([
+                baseEntity,
+                ...chord.relatedEntities.filter((entity) => entity.entityId !== baseEntity.entityId)
+            ]);
+        } else {
+            setEntities([]);
+        }
     }, [chord]);
 
     const onQuantityChangeHandler = ({entityId, value}) => {
@@ -32,6 +34,10 @@ function Table({chord, onChange}) {
         updatedEntities[entityIndex].quantity = value;
 
         setEntities(updatedEntities);
+    };
+
+    const onDeleteSku = ({entityId}) => {
+        setEntities(entities.filter((entity) => entity.entityId !== entityId));
     };
 
     return (
@@ -73,7 +79,20 @@ function Table({chord, onChange}) {
                                 }}
                             />
                             <TrashIconWrapper>
-                                <TrashIcon width="11.67px" height="15px" className='iconTrash' />
+                                <Button
+                                    variant='pseudo'
+                                    onClick={() => {
+                                        onChange();
+                                        onDeleteSku({entityId});
+                                    }}
+                                    iconOnly
+                                >
+                                    <TrashIcon
+                                        width="11.67px"
+                                        height="15px"
+                                        className='iconTrash'
+                                    />
+                                </Button>
                             </TrashIconWrapper>
                         </LastCell>
                     </td>

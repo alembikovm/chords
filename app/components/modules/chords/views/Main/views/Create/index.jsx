@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import {useHistory} from 'react-router-dom';
 import {Input} from 'fronton-react';
 import {Dropdown} from '../../../../../../common';
 import {ChordTable} from '../../components';
@@ -7,8 +8,11 @@ import FormGroup from './FormGroup';
 import FooterButtons from './components/FooterButtons';
 
 function Create() {
+    const history = useHistory();
     const [chordType, setChordType] = useState('');
     const [chord, setChord] = useState({
+        entityId: '',
+        baseEntity: {},
         relatedEntities: [],
     });
     const [isChordTypeSelected, setIsChordTypeSelected] = useState(false);
@@ -29,6 +33,10 @@ function Create() {
     const onChangeChordTypeHandler = (event) => {
         setIsChordTypeSelected(true);
         setChordType(event.target.value);
+    };
+
+    const onCancelCreate = () => {
+        history.push('/chords/main');
     };
 
     return (
@@ -55,7 +63,7 @@ function Create() {
             {isChordTypeSelected && (
                 <ChordTable chord={chord} />
             )}
-            <FooterButtons />
+            <FooterButtons onCancel={onCancelCreate} />
         </CreateWrapper>
     );
 }
