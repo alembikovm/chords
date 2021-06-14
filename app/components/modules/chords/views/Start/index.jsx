@@ -1,4 +1,5 @@
 import React from 'react';
+import {useHistory} from 'react-router-dom';
 import Container from './Container';
 import ContentWrapper from './ContentWrapper';
 import {SearchString, Dropdown, Button} from '../../../../common';
@@ -14,6 +15,8 @@ import {Link as ReactRouterLink, Route} from "react-router-dom";
 import {Create, View} from "../Main/views";
 
 function Chords() {
+    const history = useHistory();
+
     const {
         chordsItems,
         searchByItems,
@@ -30,15 +33,16 @@ function Chords() {
         console.log('Searching...');
     }
 
+    const onCreateChordHandler = () => history.push('/chords/main/create');
+
     return (
         <Grid areas={['header', 'main']}>
             <GridItem area='header'>
                 <HeaderContainer>
                     <div>Связки</div>
                     <Button
-                        as={ReactRouterLink}
-                        to="/chords/main/create"
                         iconLeft={<PlusIcon />}
+                        onClick={onCreateChordHandler}
                     >
                         Создать связку
                     </Button>

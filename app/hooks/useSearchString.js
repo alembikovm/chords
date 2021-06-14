@@ -11,18 +11,18 @@ function useSearchString() {
     const chordsItems = [
         {id: 1, value: 'Компоненты'},
         {id: 2, value: 'Дублоны'},
-        {id: 3, value: 'Похожие товары'},
+        {id: 3, value: 'Похожие\xa0товары'},
         {id: 4, value: 'Комплименты'},
         {id: 5, value: 'Замена'},
     ];
 
     const searchByItems = [
-        {id: 1, value: 'Поиск по SKU'},
-        {id: 2, value: 'Поиск по отделу'},
-        {id: 3, value: 'Поиск по подотделу'},
-        {id: 4, value: 'Поиску по типу'},
-        {id: 5, value: 'Поиск по подтипу'},
-        {id: 6, value: 'Поиск по модели'},
+        {id: 1, value: 'Поиск\xa0по\xa0SKU'},
+        {id: 2, value: 'Поиск\xa0по\xa0отделу'},
+        {id: 3, value: 'Поиск\xa0по\xa0подотделу'},
+        {id: 4, value: 'Поиску\xa0по\xa0типу'},
+        {id: 5, value: 'Поиск\xa0по\xa0подтипу'},
+        {id: 6, value: 'Поиск\xa0по\xa0модели'},
     ];
 
     const [chordType, setChordType] = useState('');

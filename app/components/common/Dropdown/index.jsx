@@ -1,5 +1,6 @@
 import React from 'react';
-import {Dropdown as DropdownFronton, DropdownItem} from 'fronton-react/unstable';
+import {Dropdown as DropdownFronton} from 'fronton-react/unstable';
+import DropdownItem from './DropdownItem';
 
 function Dropdown(props) {
     return (
@@ -11,6 +12,7 @@ function Dropdown(props) {
                 <DropdownItem
                     key={id}
                     id={id}
+                    size='m'
                     value={value}
                     onChange={props.onChange}
                 >

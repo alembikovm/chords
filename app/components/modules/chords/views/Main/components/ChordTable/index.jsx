@@ -44,16 +44,16 @@ function Table({chord, onChange}) {
         <table>
             <thead>
             <tr>
-                <th width="100px">SKU</th>
-                <th width="340px">Название</th>
-                <th width="180px">Главный SKU</th>
-                <th width="180px">Кол-во</th>
+                <th>SKU</th>
+                <th>Название</th>
+                <th>Главный SKU</th>
+                <th>Кол-во</th>
             </tr>
             </thead>
             <tbody>
             {entities.map(({entityId, name, mainPhoto, quantity}) => (
                 <tr key={entityId}>
-                    <td valign="top" width="100px">{entityId}</td>
+                    <td valign="top">{entityId}</td>
                     <EntityInfoCell>
                         <img
                             src={mainPhoto}
@@ -63,8 +63,8 @@ function Table({chord, onChange}) {
                         />
                         <Name>{name}</Name>
                     </EntityInfoCell>
-                    <td width="180px">{entityId === chord.baseEntity.entityId ? 'TRUE' : 'FALSE'}</td>
-                    <td width="180px">
+                    <td>{entityId === chord.baseEntity.entityId ? 'TRUE' : 'FALSE'}</td>
+                    <td>
                         <LastCell>
                             <Counter
                                 value={quantity}

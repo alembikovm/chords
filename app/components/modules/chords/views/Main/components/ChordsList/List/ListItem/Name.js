@@ -10,4 +10,5 @@ export default styled.div`
   color: #333333;
   white-space: normal;
   text-overflow: ellipsis;
+  overflow: hidden;
 `;
