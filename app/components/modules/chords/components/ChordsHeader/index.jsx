@@ -1,8 +1,6 @@
 import React from 'react';
-import {Link as ReactRouterLink} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
+import {useHistory} from 'react-router-dom';
 import {PlusIcon} from 'fronton-react';
-import {toggleShowFilters} from '../../../../../slices/chords/chordsSlice';
 import FilterIcon from '../../../../common/icons/FilterIcon';
 import {Button, Dropdown, SearchString} from '../../../../common';
 import ChordsHeaderWrapper from './ChordsHeaderWrapper';
@@ -24,6 +22,9 @@ function ChordsHeader(props) {
     const onSearchHandler = () => {
         console.log('Search...');
     };
+
+    const history = useHistory();
+    const onCreateChordHandler = () => history.push('/chords/main/create');
 
     return (
         <ChordsHeaderWrapper>
@@ -57,8 +58,7 @@ function ChordsHeader(props) {
                 Фильтр
             </Button>
             <Button
-                as={ReactRouterLink}
-                to="/chords/main/create"
+                onClick={onCreateChordHandler}
                 iconLeft={<PlusIcon />}
             >
                 Создать связку

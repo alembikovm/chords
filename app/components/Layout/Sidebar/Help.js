@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 const Help = styled.footer`
+  margin-top: 44px;
   padding: 16px;
   
   button {

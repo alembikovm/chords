@@ -114,47 +114,41 @@ function Main() {
                     />
                 ))}
             </Snackbar>
-            <Grid areas={[
-                'header header header',
-                'filters filters filters',
-                'list view view'
-            ]}>
-                <GridItem area='header'>
-                    <HeaderContainer>
-                        <div>Связки</div>
-                        <ChordsHeader onFilterClick={onFilterClickHandler} />
-                    </HeaderContainer>
-                </GridItem>
-                <GridItem area='filters'>
-                    {showFilters && (
-                        <FiltersContainer>
-                            <Filters />
-                        </FiltersContainer>
+            <GridItem area='header'>
+                <HeaderContainer>
+                    <div>Связки</div>
+                    <ChordsHeader onFilterClick={onFilterClickHandler} />
+                </HeaderContainer>
+            </GridItem>
+            <GridItem area='filters'>
+                {showFilters && (
+                    <FiltersContainer>
+                        <Filters />
+                    </FiltersContainer>
+                )}
+            </GridItem>
+            <GridItem area='list'>
+                <ChordsList
+                    chords={chords}
+                    onItemClick={onListItemClickHandler}
+                    loading={loading}
+                    onDeleteByIds={onDeleteByIds}
+                />
+            </GridItem>
+            <GridItem area='view'>
+                <ColorBlock bg='var(--background-primary)'>
+                    {!loading && (
+                        <>
+                            <Route exact path={`/chords/main`}>
+                                <View chord={selectedChord} onDelete={onDeleteChordHandler} />
+                            </Route>
+                            <Route path={`/chords/main/create`}>
+                                <Create />
+                            </Route>
+                        </>
                     )}
-                </GridItem>
-                <GridItem area='list'>
-                    <ChordsList
-                        chords={chords}
-                        onItemClick={onListItemClickHandler}
-                        loading={loading}
-                        onDeleteByIds={onDeleteByIds}
-                    />
-                </GridItem>
-                <GridItem area='view'>
-                    <ColorBlock bg='var(--background-primary)'>
-                        {!loading && (
-                            <>
-                                <Route exact path={`/chords/main`}>
-                                    <View chord={selectedChord} onDelete={onDeleteChordHandler} />
-                                </Route>
-                                <Route path={`/chords/main/create`}>
-                                    <Create />
-                                </Route>
-                            </>
-                        )}
-                    </ColorBlock>
-                </GridItem>
-            </Grid>
+                </ColorBlock>
+            </GridItem>
         </Container>
     );
 }
