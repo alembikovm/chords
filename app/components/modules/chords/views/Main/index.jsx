@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, {useState, useEffect} from 'react'
-import {Grid, GridItem, useSnackbar, Snack, Snackbar} from 'fronton-react';
+import {Grid, GridItem, useSnackbar, Snack, Snackbar, SnackButton} from 'fronton-react';
 import {Route, useLocation, useHistory} from 'react-router-dom';
 import Container from './Container';
 import {ChordsList} from './components';
@@ -10,9 +10,10 @@ import HeaderContainer from "./HeaderContainer";
 import FiltersContainer from "./FiltersContainer";
 import ChordsHeader from "../../components/ChordsHeader";
 import Filters from "./components/Filters";
+import InfoIcon from '../../../../common/icons/InfoIcon';
 
 function Main() {
-    const {state: snackbarState, addSnack} = useSnackbar();
+    const {state: snackbarState, addSnack, removeSnack} = useSnackbar();
     const [loading, setLoading] = useState(true);
     const [chords, setChords] = useState([]);
     const [selectedChord, setSelectedChord] = useState(null);
@@ -29,7 +30,25 @@ function Main() {
         setSelectedChord(chord)
     }
 
-    const onDeleteChordHandler = async (chordId) => {
+    const onDeleteChordHandler = (chordId) => {
+        addSnack({
+            id: 'onConfirmDeleteChordSnack',
+            title: 'Вы действительно хотите удалить связку?',
+            type: 'alert',
+            time: false,
+            icon: <InfoIcon color='brand-dark' />,
+            wideButton: true,
+            closeButton: true,
+            confirmButton: true,
+            buttonText: 'Подтвердить',
+            onClick: () => {
+                removeSnack('onConfirmDeleteChordSnack');
+                onConfirmDeleteChord(chordId);
+            },
+        });
+    };
+
+    const onConfirmDeleteChord = async (chordId) => {
         let snack = {
             id: 'onDeleteChordSnack',
             title: 'Связка успешно удалена',
@@ -75,7 +94,25 @@ function Main() {
 
     const onFilterClickHandler = () => setShowFilters(!showFilters);
 
-    const onDeleteByIds = async (selectedIds) => {
+    const onDeleteByIds = (selectedIds) => {
+        addSnack({
+            id: 'onConfirmDeleteChordsSnack',
+            title: 'Вы действительно хотите удалить связку?',
+            type: 'alert',
+            time: false,
+            icon: <InfoIcon color='brand-dark' />,
+            wideButton: true,
+            closeButton: true,
+            confirmButton: true,
+            buttonText: 'Подтвердить',
+            onClick: () => {
+                removeSnack('onConfirmDeleteChordsSnack');
+                onConfirmDeleteByIds(selectedIds);
+            },
+        });
+    };
+
+    const onConfirmDeleteByIds = async (selectedIds) => {
         let snack = {
             id: 'onDeleteChordSnack',
             title: 'Связки успешно удалены',
@@ -102,41 +139,41 @@ function Main() {
     }
 
     return (
-        <Container>
+        <div style={{display: 'flex', flexDirection: 'column', height: '100%'}}>
             <Snackbar>
-                {snackbarState.map(({ id, title, type, time }) => (
+                {snackbarState.map(({ id, title, type, time, onClick, wideButton, closeButton, confirmButton, buttonText }) => (
                     <Snack
                         key={id}
                         id={id}
                         header={title}
                         variant={type}
                         autoHideTimer={time ? 3000 : undefined}
-                    />
+                        wideButton={wideButton}
+                        closeButton={closeButton}
+                    >
+                        {confirmButton && <SnackButton onClick={onClick}>{buttonText}</SnackButton>}
+                    </Snack>
                 ))}
             </Snackbar>
-            <GridItem area='header'>
-                <HeaderContainer>
-                    <div>Связки</div>
-                    <ChordsHeader onFilterClick={onFilterClickHandler} />
-                </HeaderContainer>
-            </GridItem>
-            <GridItem area='filters'>
-                {showFilters && (
-                    <FiltersContainer>
-                        <Filters />
-                    </FiltersContainer>
-                )}
-            </GridItem>
-            <GridItem area='list'>
-                <ChordsList
-                    chords={chords}
-                    onItemClick={onListItemClickHandler}
-                    loading={loading}
-                    onDeleteByIds={onDeleteByIds}
-                />
-            </GridItem>
-            <GridItem area='view'>
-                <ColorBlock bg='var(--background-primary)'>
+            <HeaderContainer>
+                <div>Связки</div>
+                <ChordsHeader onFilterClick={onFilterClickHandler} />
+            </HeaderContainer>
+            {showFilters && (
+                <FiltersContainer>
+                    <Filters />
+                </FiltersContainer>
+            )}
+            <div style={{display: 'flex', flex: '1 1 auto'}}>
+                <div style={{display: 'flex', flexDirection: 'column', flex: '0 0 33%'}}>
+                    <ChordsList
+                        chords={chords}
+                        onItemClick={onListItemClickHandler}
+                        loading={loading}
+                        onDeleteByIds={onDeleteByIds}
+                    />
+                </div>
+                <div style={{flex: '1 1 auto', backgroundColor: 'var(--background-primary)'}}>
                     {!loading && (
                         <>
                             <Route exact path={`/chords/main`}>
@@ -147,9 +184,9 @@ function Main() {
                             </Route>
                         </>
                     )}
-                </ColorBlock>
-            </GridItem>
-        </Container>
+                </div>
+            </div>
+        </div>
     );
 }
 

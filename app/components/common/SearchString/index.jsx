@@ -4,12 +4,13 @@ import {
     Button,
     Dropdown,
     Input,
-} from './';
-import SearchIcon from './icons/SearchIcon';
+} from '../';
+import SearchIcon from '../icons/SearchIcon';
+import SearchStringContainer from './SearchStringContainer';
 
 function SearchString(props) {
     return (
-        <Input
+        <SearchStringContainer
             inputSize='m'
             allowClear
             startAdornment={

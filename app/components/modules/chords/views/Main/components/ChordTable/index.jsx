@@ -6,6 +6,7 @@ import TrashIcon from "../../../../../../common/icons/TrashIcon";
 import TrashIconWrapper from "./TrashIconWrapper";
 import LastCell from "./LastCell";
 import {Button} from "../../../../../../common";
+import Switcher from "../../../../../../common/Switcher";
 
 function Table({chord, onChange}) {
     const [entities, setEntities] = useState([]);
@@ -63,7 +64,9 @@ function Table({chord, onChange}) {
                         />
                         <Name>{name}</Name>
                     </EntityInfoCell>
-                    <td>{entityId === chord.baseEntity.entityId ? 'TRUE' : 'FALSE'}</td>
+                    <td>
+                        <Switcher id={entityId} checked={entityId === chord.baseEntity.entityId} />
+                    </td>
                     <td>
                         <LastCell>
                             <Counter

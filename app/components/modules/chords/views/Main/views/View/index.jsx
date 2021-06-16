@@ -59,7 +59,7 @@ function ChordView(props) {
                 <Loader size="xl" />
             </LoaderContainer>
         ) : (
-            <>
+            <div style={{display: 'flex', flexDirection: 'column    '}}>
                 {isEdit ? (
                     <EditWrapper>
                         <h2>Редактирование связки</h2>
@@ -118,7 +118,7 @@ function ChordView(props) {
                     <ChordTable chord={chord} onChange={onTableChange} />
                     {isEdit && <FooterButtons onSave={onSaveEditHandler} onCancel={onCancelEditHandler} />}
                 </ViewMain>
-            </>
+            </div>
         )
     );
 }

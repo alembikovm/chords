@@ -86,15 +86,17 @@ function ChordsList(props) {
                         </ChordsSelectedText>
                     </div>
                 </ChordsListHeader>
-                <List
-                    items={items.slice(
-                        (currentPage - 1) * itemsPerPage,
-                        currentPage * itemsPerPage
-                    )}
-                    onItemCheckClick={onItemCheckClickHandler}
-                    onItemClick={props.onItemClick}
-                    loading={props.loading}
-                />
+                <div style={{flex: '1 1 auto', overflow: 'hidden', position: 'relative'}}>
+                    <List
+                        items={items.slice(
+                            (currentPage - 1) * itemsPerPage,
+                            currentPage * itemsPerPage
+                        )}
+                        onItemCheckClick={onItemCheckClickHandler}
+                        onItemClick={props.onItemClick}
+                        loading={props.loading}
+                    />
+                </div>
             </ChordsListMain>
             <PaginationContainer>
                 <Pagination

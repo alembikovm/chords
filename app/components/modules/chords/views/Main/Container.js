@@ -9,7 +9,7 @@ const Container = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 71px 1fr;
   max-width: 1512px;
-  height: 100vh;
+  height: 100%;
 `;
 
 export default Container;

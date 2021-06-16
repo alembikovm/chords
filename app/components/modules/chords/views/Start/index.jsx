@@ -7,6 +7,7 @@ import { SearchString, Dropdown, Button } from '../../../../common';
 import useSearchString from '../../../../../hooks/useSearchString';
 import HeaderContainer from "../Main/HeaderContainer";
 import StartWrapper from './StartWrapper';
+import Switcher from '../../../../common/Switcher';
 
 function Chords() {
     const history = useHistory();
