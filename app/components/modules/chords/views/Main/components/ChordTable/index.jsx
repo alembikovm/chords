@@ -8,7 +8,7 @@ import LastCell from "./LastCell";
 import {Button} from "../../../../../../common";
 import Switcher from "../../../../../../common/Switcher";
 
-function Table({chord, onChange}) {
+function Table({chord, onChange, onChangeBaseEntity}) {
     const [entities, setEntities] = useState([]);
 
     useEffect(() => {
@@ -65,7 +65,7 @@ function Table({chord, onChange}) {
                         <Name>{name}</Name>
                     </EntityInfoCell>
                     <td>
-                        <Switcher id={entityId} checked={entityId === chord.baseEntity.entityId} />
+                        <Switcher id={entityId} checked={entityId === chord.baseEntity.entityId} onChange={(event) => onChangeBaseEntity(entityId, event)} />
                     </td>
                     <td>
                         <LastCell>

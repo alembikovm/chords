@@ -62,7 +62,7 @@ export default createGlobalStyle`
       tbody {
         display: block;
         overflow: auto;
-        max-height: 775px;
+        max-height: 670px;
         
         tr {
           display: table;

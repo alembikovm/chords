@@ -18,6 +18,7 @@ function ListItem({
     relatedEntities,
     checked,
     onItemCheckClick,
+    selectedChordId,
     onClick,
 }) {
     const sku = relatedEntities.reduce((res, entity) => {
@@ -26,8 +27,12 @@ function ListItem({
         if (entity.avsTrigger === 'GRAY') return {...res, gray: res.gray + 1};
     }, {green: 0, yellow: 0, gray: 0});
 
+    const typesHash = {
+        COMPLEMENT: 'комплимент',
+    };
+
     return (
-        <ItemWrapper onClick={onClick}>
+        <ItemWrapper onClick={onClick} style={{borderRight: (chordId === selectedChordId) && '3px solid var(--control-primary)' }}>
             <CheckboxContainer>
                 <Checkbox checked={checked} onChange={(value) => onItemCheckClick({chordId, checked: value})} />
             </CheckboxContainer>
@@ -37,7 +42,7 @@ function ListItem({
                         ID {chordId}
                     </ItemId>
                     <Type>
-                        {chordType}
+                        {typesHash[chordType]}
                     </Type>
                 </Title>
                 <Sku sku={sku} type={chordType} />

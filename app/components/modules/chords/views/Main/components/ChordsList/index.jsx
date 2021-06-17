@@ -95,6 +95,7 @@ function ChordsList(props) {
                         onItemCheckClick={onItemCheckClickHandler}
                         onItemClick={props.onItemClick}
                         loading={props.loading}
+                        selectedChordId={props.selectedChordId}
                     />
                 </div>
             </ChordsListMain>

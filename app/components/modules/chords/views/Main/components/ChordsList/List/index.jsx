@@ -18,6 +18,7 @@ function List(props) {
                     key={item.chordId}
                     onItemCheckClick={props.onItemCheckClick}
                     {...item}
+                    selectedChordId={props.selectedChordId}
                     onClick={() => props.onItemClick(item.chordId)}
                 />
             ))}

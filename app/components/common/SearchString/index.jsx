@@ -7,9 +7,11 @@ import {
 } from '../';
 import SearchIcon from '../icons/SearchIcon';
 import SearchStringContainer from './SearchStringContainer';
+// import SearchStringWeb from '@lmui/search-string-module';
 
 function SearchString(props) {
     return (
+        // <SearchStringWeb />
         <SearchStringContainer
             inputSize='m'
             allowClear

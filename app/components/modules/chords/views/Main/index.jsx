@@ -171,6 +171,7 @@ function Main() {
                         onItemClick={onListItemClickHandler}
                         loading={loading}
                         onDeleteByIds={onDeleteByIds}
+                        selectedChordId={selectedChord?.chordId}
                     />
                 </div>
                 <div style={{flex: '1 1 auto', backgroundColor: 'var(--background-primary)'}}>

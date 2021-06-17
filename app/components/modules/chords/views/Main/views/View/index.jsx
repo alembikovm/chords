@@ -15,6 +15,7 @@ import FooterButtons from "../Create/components/FooterButtons";
 import FormGroup from "../Create/FormGroup";
 import {Dropdown, Input} from "../../../../../../common";
 import EditWrapper from "./EditWrapper";
+import chords from "../../../../mocks/chords";
 
 function ChordView(props) {
     const [isEdit, setEdit] = useState(false);
@@ -39,6 +40,12 @@ function ChordView(props) {
 
     const onCancelEditHandler = (event) => {
         setEdit(false);
+    };
+
+    const onChangeBaseEntityHandler = (entityId, event) => {
+        console.log(entityId);
+        const baseEntityIndex = chord.relatedEntities.findIndex((relatedEntity) => relatedEntity.entityId === entityId);
+        setChord({...chord,  baseEntity: chord.relatedEntities[baseEntityIndex]});
     };
 
     const onAddSkuHandler = () => {
@@ -66,7 +73,7 @@ function ChordView(props) {
                         <FormGroup>
                             <Dropdown
                                 label='Тип связки'
-                                value={chord.type}
+                                value={chord.chordType}
                                 items={chordsItems}
                                 disabled
                             />
@@ -115,7 +122,7 @@ function ChordView(props) {
                             Добавить SKU
                         </Button>
                     )}
-                    <ChordTable chord={chord} onChange={onTableChange} />
+                    <ChordTable chord={chord} onChange={onTableChange} onChangeBaseEntity={onChangeBaseEntityHandler} />
                     {isEdit && <FooterButtons onSave={onSaveEditHandler} onCancel={onCancelEditHandler} />}
                 </ViewMain>
             </div>
