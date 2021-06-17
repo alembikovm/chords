@@ -2,7 +2,7 @@ import React from 'react';
 import {GridItem, PlusIcon } from "fronton-react";
 import {useHistory} from 'react-router-dom';
 import StartLayout from './StartLayout';
-import Header from './Header';
+import Header from '../../components/Header';
 import Main from './Main';
 import SearchContainer from './SearchContainer';
 import SearchTitle from './SearchTitle';
@@ -28,7 +28,7 @@ function Chords() {
         console.log('Searching...');
     }
 
-    const onCreateChordHandler = () => history.push('/chords/main/create');
+    const onCreateChordHandler = () => history.push('/chords/main/add');
 
     return (
         <StartLayout areas={['header', 'main']} rows='70px 1fr' gap='space-10'>

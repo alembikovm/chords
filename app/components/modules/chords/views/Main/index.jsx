@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, {useState, useEffect} from 'react'
-import {Grid, GridItem, useSnackbar, Snack, Snackbar, SnackButton} from 'fronton-react';
-import {Route, useLocation, useHistory} from 'react-router-dom';
+import {Grid, GridItem, useSnackbar, Snack, Snackbar, SnackButton, PlusIcon} from 'fronton-react';
+import {Switch, Route, useLocation, useHistory, useRouteMatch} from 'react-router-dom';
 import Container from './Container';
 import {ChordsList} from './components';
 import {Create, View} from './views';
@@ -9,8 +9,35 @@ import ColorBlock from "./ColorBlock";
 import HeaderContainer from "./HeaderContainer";
 import FiltersContainer from "./FiltersContainer";
 import ChordsHeader from "../../components/ChordsHeader";
-import Filters from "./components/Filters";
+// import Filters from "./components/Filters";
 import InfoIcon from '../../../../common/icons/InfoIcon';
+
+import MainLayout from './MainLayout';
+import Header from '../../components/Header';
+import Filters from './Filters';
+import ListContainer from './ListContainer';
+import MainContainer from './Main';
+import Buttons from './Buttons';
+import FilterIcon from '../../../../common/icons/FilterIcon';
+import {Button} from '../../../../common';
+
+function ChordEdit() {
+    return (
+        <div>Chord edit</div>
+    );
+}
+
+function ChordAdd() {
+    return (
+        <div>Chord add</div>
+    );
+}
+
+function ChordView() {
+    return (
+        <div>Chord view</div>
+    );
+}
 
 function Main() {
     const {state: snackbarState, addSnack, removeSnack} = useSnackbar();
@@ -138,55 +165,124 @@ function Main() {
         }
     }
 
+    const getAreas = () => ([
+        'header header',
+        ...showFilters ? ['filters filters'] : [],
+        'list main', 
+    ]);
+    const getRows = () => ([
+        '70px',
+        ...showFilters ? ['70px'] : [],
+        '1fr', 
+    ]);
+
+    const onCreateChordHandler = () => history.push('/chords/main/add');
+
+    const {path, url} = useRouteMatch();
+
     return (
-        <div style={{display: 'flex', flexDirection: 'column', height: '100%'}}>
-            <Snackbar>
-                {snackbarState.map(({ id, title, type, time, onClick, wideButton, closeButton, confirmButton, buttonText }) => (
-                    <Snack
-                        key={id}
-                        id={id}
-                        header={title}
-                        variant={type}
-                        autoHideTimer={time ? 3000 : undefined}
-                        wideButton={wideButton}
-                        closeButton={closeButton}
-                    >
-                        {confirmButton && <SnackButton onClick={onClick}>{buttonText}</SnackButton>}
-                    </Snack>
-                ))}
-            </Snackbar>
-            <HeaderContainer>
-                <div>Связки</div>
-                <ChordsHeader onFilterClick={onFilterClickHandler} />
-            </HeaderContainer>
+        <MainLayout
+            areas={getAreas()}
+            rows={getRows()}
+            columns={['1fr', '2fr']}
+            gap='space-10'
+        >
+            <GridItem area='header'>
+                <Header>
+                    <h1>Связки</h1>
+                    <Buttons>
+                        <Button
+                            iconLeft={<FilterIcon />}
+                            variant='pseudo'
+                            onClick={onFilterClickHandler}
+                        >
+                            Фильтр
+                        </Button>
+                        <Button
+                            iconLeft={<PlusIcon />}
+                            onClick={onCreateChordHandler}
+                        >
+                            Создать связку 
+                        </Button>
+                    </Buttons>
+                </Header>
+            </GridItem>
             {showFilters && (
-                <FiltersContainer>
-                    <Filters />
-                </FiltersContainer>
+                <GridItem area='filters'>
+                    <Filters>
+                        filters
+                    </Filters>
+                </GridItem>
             )}
-            <div style={{display: 'flex', flex: '1 1 auto'}}>
-                <div style={{display: 'flex', flexDirection: 'column', flex: '0 0 33%'}}>
-                    <ChordsList
-                        chords={chords}
-                        onItemClick={onListItemClickHandler}
-                        loading={loading}
-                        onDeleteByIds={onDeleteByIds}
-                    />
-                </div>
-                <div style={{flex: '1 1 auto', backgroundColor: 'var(--background-primary)'}}>
-                    {!loading && (
-                        <>
-                            <Route exact path={`/chords/main`}>
-                                <View chord={selectedChord} onDelete={onDeleteChordHandler} />
-                            </Route>
-                            <Route path={`/chords/main/create`}>
-                                <Create />
-                            </Route>
-                        </>
-                    )}
-                </div>
-            </div>
-        </div>
+            <GridItem area='list'>
+                <ListContainer>
+                    list
+                </ListContainer>
+            </GridItem>
+            <GridItem area='main'>
+                <MainContainer>
+                    <Switch>
+                        <Route path={`${path}/add`}>
+                            <ChordAdd />
+                        </Route>
+                        <Route path={`${path}/edit/:chordId`}>
+                            <ChordEdit />
+                        </Route>
+                        <Route path={`${path}/:chordId`}>
+                            <ChordView />
+                        </Route>
+                    </Switch>
+                </MainContainer>
+            </GridItem>
+        </MainLayout>
+        // <div style={{display: 'flex', flexDirection: 'column', height: '100%'}}>
+        //     <Snackbar>
+        //         {snackbarState.map(({ id, title, type, time, onClick, wideButton, closeButton, confirmButton, buttonText }) => (
+        //             <Snack
+        //                 key={id}
+        //                 id={id}
+        //                 header={title}
+        //                 variant={type}
+        //                 autoHideTimer={time ? 3000 : undefined}
+        //                 wideButton={wideButton}
+        //                 closeButton={closeButton}
+        //             >
+        //                 {confirmButton && <SnackButton onClick={onClick}>{buttonText}</SnackButton>}
+        //             </Snack>
+        //         ))}
+        //     </Snackbar>
+        //     <HeaderContainer>
+        //         <div>Связки</div>
+        //         <ChordsHeader onFilterClick={onFilterClickHandler} />
+        //     </HeaderContainer>
+        //     {showFilters && (
+        //         <FiltersContainer>
+        //             <Filters />
+        //         </FiltersContainer>
+        //     )}
+        //     <div style={{display: 'flex', flex: '1 1 auto'}}>
+        //         <div style={{display: 'flex', flexDirection: 'column', flex: '0 0 33%'}}>
+        //             <ChordsList
+        //                 chords={chords}
+        //                 onItemClick={onListItemClickHandler}
+        //                 loading={loading}
+        //                 onDeleteByIds={onDeleteByIds}
+        //             />
+        //         </div>
+        //         <div style={{flex: '1 1 auto', backgroundColor: 'var(--background-primary)'}}>
+        //             {!loading && (
+        //                 <>
+        //                     <Route exact path={`/chords/main`}>
+        //                         <View chord={selectedChord} onDelete={onDeleteChordHandler} />
+        //                     </Route>
+        //                     <Route path={`/chords/main/create`}>
+        //                         <Create />
+        //                     </Route>
+        //                 </>
+        //             )}
+        //         </div>
+        //     </div>
+        // </div>
     );
 }
 

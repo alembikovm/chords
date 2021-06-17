@@ -5,4 +5,5 @@ export default styled.p`
 	font-weight: 500;
 	line-height: 20px;
 	text-align: center;
+	margin-top: 0px;
 `;
