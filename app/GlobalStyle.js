@@ -3,14 +3,15 @@ import { createGlobalStyle } from 'styled-components';
 export default createGlobalStyle`
 	* {
 		box-sizing: border-box;
-        font-family: Roboto, sans-serif;
+    font-family: Roboto, sans-serif;
 	}
 
 	body {
 		margin: 0;
+    background-color: var(--background-secondary);
 	}
     
-    h2 {
+    h1, h2 {
       font-weight: 500;
       font-size: 26px;
       line-height: 32px;

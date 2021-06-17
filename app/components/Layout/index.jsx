@@ -1,20 +1,22 @@
 import React from 'react'
-import {Route} from 'react-router-dom';
-import ChordsHeader from '../modules/chords/components/ChordsHeader';
+import {Grid, GridItem} from 'fronton-react';
 import Layout from './Layout';
 import Sidebar from './Sidebar';
-import Header from './Header';
 
 class LayoutWrapper extends React.Component {
     render() {
         return (
-            <Layout>
-                <Layout.Sidebar>
+            <Layout
+                areas={['aside main']}
+                columns='250px 1fr'
+                gap='space-150'
+            >
+                <GridItem area='aside'>
                     <Sidebar />
-                </Layout.Sidebar>
-                <Layout.Main>
+                </GridItem>
+                <GridItem area='main'>
                     {this.props.children}
-                </Layout.Main>
+                </GridItem>
             </Layout>
         );
     }

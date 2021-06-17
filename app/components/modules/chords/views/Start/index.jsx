@@ -1,13 +1,13 @@
 import React from 'react';
-import { Grid, GridItem, PlusIcon } from "fronton-react";
-import { useHistory } from 'react-router-dom';
-import Container from './Container';
-import ContentWrapper from './ContentWrapper';
-import { SearchString, Dropdown, Button } from '../../../../common';
+import {GridItem, PlusIcon } from "fronton-react";
+import {useHistory} from 'react-router-dom';
+import StartLayout from './StartLayout';
+import Header from './Header';
+import Main from './Main';
+import SearchContainer from './SearchContainer';
+import SearchTitle from './SearchTitle';
+import {SearchString, Dropdown, Button} from '../../../../common';
 import useSearchString from '../../../../../hooks/useSearchString';
-import HeaderContainer from "../Main/HeaderContainer";
-import StartWrapper from './StartWrapper';
-import Switcher from '../../../../common/Switcher';
 
 function Chords() {
     const history = useHistory();
@@ -31,41 +31,43 @@ function Chords() {
     const onCreateChordHandler = () => history.push('/chords/main/create');
 
     return (
-        <StartWrapper>
-            <HeaderContainer>
-                <div>Связки</div>
-                <Button
-                    iconLeft={<PlusIcon />}
-                    onClick={onCreateChordHandler}
-                >
-                    Создать связку 
-                </Button>
-            </HeaderContainer>
-            <Container>
-                <ContentWrapper>
-                    <div>
-                        Для поиска связки выбери ее тип и критерий поиска
-                    </div>
-                    <Dropdown
-                        placeholder="Выберите тип связки"
-                        value={chordType}
-                        items={chordsItems}
-                        onChange={onChangeChordTypeHandler}
-                    />
-                    <SearchString
-                        value={searchString}
-                        placeholder="Введи SKU"
-                        disabled={disableSearch}
-                        dropdownValue={searchBy}
-                        dropdownItems={searchByItems}
-                        to='/chords/main'
-                        onDropdownChange={onChangeSearchBy}
-                        onChange={onChangeSearchString}
-                        onSearch={onSearchHandler}
-                    />
-                </ContentWrapper>
-            </Container>
-        </StartWrapper>
+        <StartLayout areas={['header', 'main']} rows='70px 1fr' gap='space-10'>
+            <GridItem area='header'>
+                <Header>
+                    <h1>Связки</h1>
+                    <Button
+                        iconLeft={<PlusIcon />}
+                        onClick={onCreateChordHandler}
+                    >
+                        Создать связку 
+                    </Button>
+                </Header>
+            </GridItem>
+            <GridItem area='main'>
+                <Main>
+                    <SearchContainer>
+                        <SearchTitle>Для поиска связки выбери ее тип и критерий поиска</SearchTitle>
+                        <Dropdown
+                            placeholder="Выберите тип связки"
+                            value={chordType}
+                            items={chordsItems}
+                            onChange={onChangeChordTypeHandler}
+                        />
+                        <SearchString
+                            value={searchString}
+                            placeholder="Введи SKU"
+                            disabled={disableSearch}
+                            dropdownValue={searchBy}
+                            dropdownItems={searchByItems}
+                            to='/chords/main'
+                            onDropdownChange={onChangeSearchBy}
+                            onChange={onChangeSearchString}
+                            onSearch={onSearchHandler}
+                        />
+                    </SearchContainer>
+                </Main>
+            </GridItem>
+        </StartLayout>
     );
 }
 
