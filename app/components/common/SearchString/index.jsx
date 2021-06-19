@@ -24,10 +24,8 @@ function SearchString(props) {
             }
             endAdornment={
                 <Button
-                    as={ReactRouterLink}
-                    to={props.to}
                     size='s'
-                    icononly
+                    iconOnly
                     disabled={props.disabled}
                     onClick={props.onSearch}
                 >

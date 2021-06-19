@@ -2,7 +2,7 @@ import React from 'react';
 
 function ChordEdit() {
     return (
-        <div>Chord Edit</div>
+        <div>Chord edit</div>
     );
 }
 

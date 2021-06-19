@@ -3,17 +3,23 @@ import {createSlice} from '@reduxjs/toolkit';
 export const chordsSlice = createSlice({
     name: 'chords',
     initialState: {
-        filters: {
-            show: false,
-        }
+        chords: [],
+        selectedChord: null,
+        loading: false,
     },
     reducers: {
-        toggleShowFilters: (state) => {
-            state.filters.show = !state.filters.show;
+        setChords: (state, action) => {
+            state.chords = action.payload;
+        },
+        setSelectedChord: (state, action) => {
+            state.selectedChord = action.payload;
+        },
+        setLoading: (state, action) => {
+            state.loading = action.payload;
         },
     },
 });
 
-export const { toggleShowFilters } = chordsSlice.actions;
+export const {setChords, setSelectedChord, setLoading} = chordsSlice.actions;
 
 export default chordsSlice.reducer;
