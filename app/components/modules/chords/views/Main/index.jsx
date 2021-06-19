@@ -1,37 +1,21 @@
 import axios from 'axios';
 import React, {useState, useEffect} from 'react'
 import {GridItem, PlusIcon} from 'fronton-react';
-import {Switch, Route, useRouteMatch} from 'react-router-dom';
+import {Switch, Route, useRouteMatch, useHistory} from 'react-router-dom';
+import FilterIcon from '../../../../common/icons/FilterIcon';
 import MainLayout from './MainLayout';
 import Header from '../../components/Header';
 import Filters from './Filters';
 import ListContainer from './ListContainer';
 import MainContainer from './Main';
 import Buttons from './Buttons';
-import FilterIcon from '../../../../common/icons/FilterIcon';
-import {Button} from '../../../../common';
 import List from './components/List';
 import Loader from './components/Loader';
-
-function ChordEdit() {
-    return (
-        <div>Chord edit</div>
-    );
-}
-
-function ChordAdd() {
-    return (
-        <div>Chord add</div>
-    );
-}
-
-function ChordView() {
-    return (
-        <div>Chord view</div>
-    );
-}
+import {Button} from '../../../../common';
+import {ChordAdd, ChordEdit, ChordView} from './subviews';
 
 function Main() {
+    const history = useHistory();
     const {path} = useRouteMatch();
     const [loading, setLoading] = useState(false);
     const [showFilters, setShowFilters] = useState(false);
@@ -62,7 +46,7 @@ function Main() {
 
     const onShowFiltersHandler = () => setShowFilters(!showFilters);
 
-    const onCreateChordHandler = () => history.push('/chords/main/add');
+    const onCreateChordHandler = () => history.push(`${path}/add`);
 
     const getAreas = () => ([
         'header header',
