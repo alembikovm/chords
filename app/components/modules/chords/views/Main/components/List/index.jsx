@@ -12,8 +12,8 @@ function List({items}) {
     const [chords, setChords] = useState(items.map((item) => ({...item, checked: false})));
     const [checkedAll, setCheckedAll] = useState(false);
     const [checkedIds, setCheckedIds] = useState([]);
-    const [itemsCount, setCount] = useState(items.length);
-    const [itemsPerPage, setItemsPerPage] = useState(10);
+    const [itemsCount] = useState(items.length);
+    const [itemsPerPage] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
 
     const onCheckedAllHandler = (checked) => {

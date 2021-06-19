@@ -11,6 +11,7 @@ import Buttons from './Buttons';
 import FilterIcon from '../../../../common/icons/FilterIcon';
 import {Button} from '../../../../common';
 import List from './components/List';
+import Loader from './components/Loader';
 
 function ChordEdit() {
     return (
@@ -110,7 +111,7 @@ function Main() {
             )}
             <GridItem area='list'>
                 <ListContainer>
-                    {loading ? 'загрузка...' : <List items={chords} />}
+                    {loading ? <Loader /> : <List items={chords} />}
                 </ListContainer>
             </GridItem>
             <GridItem area='main'>
