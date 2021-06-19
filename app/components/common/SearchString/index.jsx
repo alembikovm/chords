@@ -27,7 +27,7 @@ function SearchString(props) {
                     as={ReactRouterLink}
                     to={props.to}
                     size='s'
-                    iconOnly
+                    icononly
                     disabled={props.disabled}
                     onClick={props.onSearch}
                 >

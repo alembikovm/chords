@@ -88,7 +88,7 @@ function Table({chord, onChange}) {
                                         onChange();
                                         onDeleteSku({entityId});
                                     }}
-                                    iconOnly
+                                    icononly
                                 >
                                     <TrashIcon
                                         width="11.67px"

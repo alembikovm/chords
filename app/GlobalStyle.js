@@ -18,6 +18,13 @@ export default createGlobalStyle`
       margin: 0px;
     }
     
+    h3 {
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 28px;
+      margin: 0px;
+    }
+    
     a {
       text-decoration: none;
       color: inherit;
@@ -95,6 +102,12 @@ export default createGlobalStyle`
             }
           }
         }
+      }
+    }
+    
+    .pagination {
+      ul {
+        justify-content: center;
       }
     }
 `;

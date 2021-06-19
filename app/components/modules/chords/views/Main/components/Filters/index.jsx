@@ -66,7 +66,7 @@ function Filters(props) {
                 <Button
                     onClick={onResetFilters}
                     variant='secondary'
-                    iconOnly
+                    icononly
                 >
                     <CleanIcon />
                 </Button>

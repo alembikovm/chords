@@ -93,7 +93,7 @@ function ChordView(props) {
                                 kind="regular"
                                 size="m"
                                 variant="secondary"
-                                iconOnly
+                                icononly
                                 rounded
                                 onClick={() => props.onDelete(chord.chordId)}
                             >

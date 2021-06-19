@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "start": "set NODE_ENV=development&& webpack serve",
-    "build": "set NODE_ENV=production && webpack"
+    "start": "NODE_ENV=development webpack serve",
+    "build": "NODE_ENV=production webpack"
   },
   "devDependencies": {
     "@babel/core": "^7.13.16",
@@ -33,9 +33,6 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.14.0",
-    "@lmui/components": "^5.2.0",
-    "@lmui/filter-screen-header-module-web": "^5.2.0",
-    "@lmui/search-string-module-web": "^5.2.0",
     "@reduxjs/toolkit": "^1.5.1",
     "axios": "^0.21.1",
     "fronton-react": "^0.14.1",

@@ -63,7 +63,7 @@ function ChordsList(props) {
                         <ChordsSelectedText>
                             {selectedIds.length} связок выбрано
                         </ChordsSelectedText>
-                        <Button kind="icon" size='s' style={{marginLeft: '12px'}} iconOnly disabled>
+                        <Button kind="icon" size='s' style={{marginLeft: '12px'}} icononly disabled>
                             <DownloadIcon />
                         </Button>
                         <Button
@@ -75,7 +75,7 @@ function ChordsList(props) {
                                 await props.onDeleteByIds(selectedIds);
                                 setSelectedIds([]);
                             }}
-                            iconOnly
+                            icononly
                         >
                             <TrashIcon />
                         </Button>
