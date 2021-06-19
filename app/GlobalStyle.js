@@ -110,4 +110,9 @@ export default createGlobalStyle`
         justify-content: center;
       }
     }
+    
+    .input-block {
+      display: block;
+      position: relative;
+    }
 `;
