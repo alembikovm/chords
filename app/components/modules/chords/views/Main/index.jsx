@@ -20,6 +20,8 @@ function Main() {
     const location = useLocation();
     const history = useHistory();
     const [showFilters, setShowFilters] = useState(false);
+    const [templateLoading, setTemplateLoading] = useState(true);
+    const [templateList, setTemplateList] = useState([]);
 
     const onListItemClickHandler = (chordId) => {
         if (location.pathname !== '/chords/main') {
@@ -89,9 +91,25 @@ function Main() {
     };
 
     useEffect(() => {
-        const URL = 'https://run.mocky.io/v3/1ebf42f8-041c-4dbf-848c-3c55570f5e5e';
+      const fetchTemplateList = async () => {
+        setTemplateLoading(true);
 
-      fetchChords(URL);
+        try {
+            const response = await axios.get('https://run.mocky.io/v3/40d978ed-1ce8-42b7-b0a8-f09be55cda41');
+            const templateList = response.data;
+
+            setTemplateList(templateList);
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setTemplateLoading(false);
+        }
+    };
+
+    fetchTemplateList()
+      
+    const URL = 'https://run.mocky.io/v3/1ebf42f8-041c-4dbf-848c-3c55570f5e5e';
+    fetchChords(URL);
     }, []);
 
     const onFilterClickHandler = () => setShowFilters(!showFilters);
@@ -162,6 +180,8 @@ function Main() {
                 <div>Связки</div>
                 <ChordsHeader 
                     onFilterClick={onFilterClickHandler} 
+                    templateLoading={templateLoading}
+                    templateList={templateList}
                     onClickSearchHandler={onClickSearchHandler}
                 />
             </HeaderContainer>
