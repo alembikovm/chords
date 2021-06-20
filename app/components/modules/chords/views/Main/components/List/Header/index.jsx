@@ -16,6 +16,7 @@ function Header({
     checkedChordsQuantity,
     foundChordsQuantity,
     onCheckedAll,
+    onDelete,
 }) {
     const isDisabledButton = !checkedChordsQuantity;
 
@@ -23,7 +24,7 @@ function Header({
         <HeaderWrapper>
             <LeftBlock>
                 <CheckedContainer>
-                    <Checkbox checked={checkedAll} onChange={onCheckedAll} />
+                    <Checkbox checked={checkedAll} disabled={!foundChordsQuantity} onChange={onCheckedAll} />
                 </CheckedContainer>
                 <ChordsQuantityText>
                     {checkedChordsQuantity} связок выбрано
@@ -44,6 +45,7 @@ function Header({
                         size='s'
                         disabled={isDisabledButton}
                         icononly
+                        onClick={onDelete}
                     >
                         <TrashListIcon />
                     </Button>

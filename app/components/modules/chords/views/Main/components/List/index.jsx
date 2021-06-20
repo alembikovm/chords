@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Pagination, PaginationItem} from 'fronton-react';
 import {useHistory, useRouteMatch} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
@@ -11,16 +11,21 @@ import ListWrapper from './ListWrapper';
 import ScrollContainer from './ScrollContainer';
 import {setSelectedChord} from '../../../../../../../slices/chords/chordsSlice';
 
-function List({items}) {
+function List({items, onDelete}) {
     const history = useHistory();
     const {path} = useRouteMatch();
     const dispatch = useDispatch();
-    const [chords, setChords] = useState(items.map((item) => ({...item, checked: false})));
+    const [chords, setChords] = useState([]);
     const [checkedAll, setCheckedAll] = useState(false);
     const [checkedIds, setCheckedIds] = useState([]);
-    const [itemsCount] = useState(items.length);
+    const [itemsCount, setItemsCount] = useState(0);
     const [itemsPerPage] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
+
+    useEffect(() => {
+        setChords(items.map((item) => ({...item, checked: false})));
+        setItemsCount(items.length);
+    }, [items]);
 
     const onCheckedAllHandler = (checked) => {
         setCheckedAll(checked);
@@ -38,7 +43,6 @@ function List({items}) {
         const chordIndex = chords.findIndex((chord) => chordId === chord.chordId);
         const updatedChords = [...chords];
         updatedChords[chordIndex].checked = checked;
-        setChords(updatedChords);
 
         if (checked) {
             setCheckedIds([...checkedIds, chordId]);
@@ -56,7 +60,6 @@ function List({items}) {
         const selectedChord = chords.find((chord) => chord.chordId === chordId);
         delete selectedChord.checked;
 
-        console.log(path);
         dispatch(setSelectedChord(selectedChord));
         history.push(`${path}/${chordId}`);
     };
@@ -69,6 +72,11 @@ function List({items}) {
                     checkedChordsQuantity={checkedIds.length}
                     foundChordsQuantity={chords.length}
                     onCheckedAll={onCheckedAllHandler}
+                    onDelete={() => {
+                        onDelete(checkedIds);
+                        setCheckedIds([]);
+                        setCheckedAll(false);
+                    }}
                 />
             </ListHeader>
             <ScrollContainer>

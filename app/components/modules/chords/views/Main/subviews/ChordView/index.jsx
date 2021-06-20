@@ -15,7 +15,7 @@ import {Button} from '../../../../../../common';
 import getChordsType from '../../helpers/getChordsType';
 import {PlusIcon} from "fronton-react";
 
-function ChordView() {
+function ChordView({onDelete}) {
     const history = useHistory();
 
     const selectedChord = useSelector((state) => state.chords.selectedChord);
@@ -33,7 +33,7 @@ function ChordView() {
                     <Button variant='secondary' onClick={onEditHandler} iconOnly rounded>
                         <EditIcon size='15px' />
                     </Button>
-                    <Button variant='secondary' iconOnly rounded>
+                    <Button variant='secondary' onClick={() => onDelete([selectedChord.chordId])} iconOnly rounded>
                         <TrashIcon size='15px' />
                     </Button>
                 </ActionButtons>
