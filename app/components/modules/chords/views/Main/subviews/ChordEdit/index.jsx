@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {useSelector} from 'react-redux';
+import {useHistory} from 'react-router-dom';
 import ActionButtons from './ActionButtons';
 import ChordId from './ChordId';
 import ChordType from './ChordType';
@@ -15,6 +16,7 @@ import FormGroup from "./FormGroup";
 import FooterButtons from '../../components/FooterButtons';
 
 function ChordEdit() {
+    const history = useHistory();
     const [searchString, setSearchString] = useState('');
     const selectedChord = useSelector((state) => state.chords.selectedChord);
 
@@ -22,7 +24,7 @@ function ChordEdit() {
         setSearchString(event.target.value);
     };
 
-    console.log(selectedChord);
+    const onCancel = () => history.go(-1);
 
     return (
         <ChordEditWrapper>
@@ -61,7 +63,7 @@ function ChordEdit() {
                 />
             </Main>
             <FooterButtons>
-                <Button variant='secondary'>Отменить</Button>
+                <Button variant='secondary' onClick={onCancel}>Отменить</Button>
                 <Button>Сохранить изменения</Button>
             </FooterButtons>
         </ChordEditWrapper>

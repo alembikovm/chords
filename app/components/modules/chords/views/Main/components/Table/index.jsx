@@ -10,7 +10,7 @@ import TrashIcon from '../../../../../../common/icons/TrashIcon';
 import {Button} from "../../../../../../common";
 
 function Table({rows, baseEntity, disabledSwitchers = false, disabledEdit = false}) {
-    const isBaseEntity = (entityId) => entityId === baseEntity.entityId;
+    const isBaseEntity = (entityId) => entityId === baseEntity?.entityId;
 
     return (
         <TableWrapper>

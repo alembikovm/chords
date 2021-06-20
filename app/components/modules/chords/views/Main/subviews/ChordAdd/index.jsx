@@ -1,10 +1,14 @@
 import React, {useState} from 'react';
+import {useHistory} from 'react-router-dom';
 import ChordAddWrapper from './ChordAddWrapper';
 import FormGroup from './FormGroup';
 import FooterButtons from '../../components/FooterButtons';
 import {Button, Dropdown, FullWidthInput} from '../../../../../../common';
+import Table from '../../components/Table';
+import {renderToStaticNodeStream} from "react-dom/server";
 
 function ChordAdd() {
+    const history = useHistory();
     const [chordType, setChordType] = useState('');
     const [isChordTypeSelected, setIsChordTypeSelected] = useState(false);
     const [searchString, setSearchString] = useState('');
@@ -25,6 +29,8 @@ function ChordAdd() {
     const onChangeSearchString = (event) => {
         setSearchString(event.target.value);
     };
+
+    const onCancel = () => history.go(-1);
 
     return (
         <ChordAddWrapper>
@@ -48,8 +54,9 @@ function ChordAdd() {
                     />
                 )}
             </FormGroup>
+            <Table rows={[]} />
             <FooterButtons>
-                <Button variant='secondary'>Отменить</Button>
+                <Button variant='secondary' onClick={onCancel}>Отменить</Button>
                 <Button>Сохранить изменения</Button>
             </FooterButtons>
         </ChordAddWrapper>
