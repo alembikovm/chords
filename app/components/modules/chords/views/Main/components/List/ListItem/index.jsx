@@ -20,9 +20,10 @@ function ListItem({
     baseEntity,
     checked,
     onCheckChord,
+    onItemClick,
 }) {
     return (
-        <ListItemWrapper>
+        <ListItemWrapper onClick={() => onItemClick(chordId)}>
             <CheckedContainer style={{marginTop: '4px'}}>
                 <Checkbox checked={checked} onChange={(value) => onCheckChord(value, chordId)} />
             </CheckedContainer>

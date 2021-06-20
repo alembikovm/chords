@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import {Pagination, PaginationItem} from 'fronton-react';
+import {useHistory, useRouteMatch} from 'react-router-dom';
+import {useDispatch} from 'react-redux';
 import Header from './Header';
 import ListItem from './ListItem';
 import ListFooter from './ListFooter';
@@ -7,8 +9,12 @@ import ListHeader from './ListHeader';
 import ListItems from './ListItems';
 import ListWrapper from './ListWrapper';
 import ScrollContainer from './ScrollContainer';
+import {setSelectedChord} from '../../../../../../../slices/chords/chordsSlice';
 
 function List({items}) {
+    const history = useHistory();
+    const {path} = useRouteMatch();
+    const dispatch = useDispatch();
     const [chords, setChords] = useState(items.map((item) => ({...item, checked: false})));
     const [checkedAll, setCheckedAll] = useState(false);
     const [checkedIds, setCheckedIds] = useState([]);
@@ -46,6 +52,15 @@ function List({items}) {
         onCheckedAllHandler(false);
     };
 
+    const onItemClickHandler = (chordId) => {
+        const selectedChord = chords.find((chord) => chord.chordId === chordId);
+        delete selectedChord.checked;
+
+        console.log(path);
+        dispatch(setSelectedChord(selectedChord));
+        history.push(`${path}/${chordId}`);
+    };
+
     return (
         <ListWrapper>
             <ListHeader>
@@ -65,6 +80,7 @@ function List({items}) {
                         <ListItem
                             key={chord.chordId}
                             {...chord}
+                            onItemClick={onItemClickHandler}
                             onCheckChord={onCheckChordHandler}
                         />
                     ))}

@@ -1,16 +1,19 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
-import {useHistory} from 'react-router';
+import {useHistory} from 'react-router-dom';
 import ActionButtons from './ActionButtons';
 import ChordId from './ChordId';
 import ChordType from './ChordType';
 import ChordViewWrapper from './ChordViewWrapper';
 import Header from './Header';
+import Main from './Main';
 import Title from './Title';
+import Table from '../../components/Table';
 import EditIcon from '../../../../../../common/icons/EditIcon';
 import TrashIcon from '../../../../../../common/icons/TrashIcon';
 import {Button} from '../../../../../../common';
 import getChordsType from '../../helpers/getChordsType';
+import {PlusIcon} from "fronton-react";
 
 function ChordView() {
     const history = useHistory();
@@ -35,6 +38,17 @@ function ChordView() {
                     </Button>
                 </ActionButtons>
             </Header>
+            <Main>
+                <Button size='s' variant='secondary' iconLeft={<PlusIcon />} onClick={onEditHandler}>
+                    Добавить SKU
+                </Button>
+                <Table
+                    rows={selectedChord.relatedEntities}
+                    baseEntity={selectedChord.baseEntity}
+                    disabledSwitchers
+                    disabledEdit
+                />
+            </Main>
         </ChordViewWrapper>
     );
 }

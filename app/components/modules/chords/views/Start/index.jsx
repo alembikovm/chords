@@ -51,6 +51,7 @@ function Chords() {
     const onSearchHandler = async () => {
         const URL = 'https://run.mocky.io/v3/1ebf42f8-041c-4dbf-848c-3c55570f5e5e';
         await fetchChords(URL);
+
         history.push(`${path}/main/${selectedChord.chordId}`);
     };
 
@@ -65,7 +66,7 @@ function Chords() {
                         iconLeft={<PlusIcon />}
                         onClick={onCreateChordHandler}
                     >
-                        Создать связку 
+                        Создать связку
                     </Button>
                 </Header>
             </GridItem>
