@@ -106,13 +106,10 @@ function Main() {
         }
     };
 
-      fetchTemplateList()
-
-      fetchChords();
+    fetchTemplateList()
       
-        const URL = 'https://run.mocky.io/v3/1ebf42f8-041c-4dbf-848c-3c55570f5e5e';
-
-      fetchChords(URL);
+    const URL = 'https://run.mocky.io/v3/1ebf42f8-041c-4dbf-848c-3c55570f5e5e';
+    fetchChords(URL);
     }, []);
 
     const onFilterClickHandler = () => setShowFilters(!showFilters);

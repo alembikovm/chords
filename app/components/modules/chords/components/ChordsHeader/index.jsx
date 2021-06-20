@@ -22,7 +22,6 @@ function ChordsHeader(props) {
         onChangeTemplateTypeIdHandler
     } = useSearchString();
 
-    
     const onSearchHandler = useCallback(
       () => {
         // Change the searchURL to API URL + searchString, when API will be ready
@@ -32,8 +31,6 @@ function ChordsHeader(props) {
       [props.onClickSearchHandler],
     )
     
-    
-
     const history = useHistory();
     const onCreateChordHandler = () => history.push('/chords/main/create');
 
