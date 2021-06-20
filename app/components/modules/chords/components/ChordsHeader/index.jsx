@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import {useHistory} from 'react-router-dom';
 import {Loader, PlusIcon, useUniqID} from 'fronton-react';
 import FilterIcon from '../../../../common/icons/FilterIcon';
@@ -22,9 +22,17 @@ function ChordsHeader(props) {
         onChangeTemplateTypeIdHandler
     } = useSearchString();
 
-    const onSearchHandler = () => {
-        console.log('Search...');
-    };
+    
+    const onSearchHandler = useCallback(
+      () => {
+        // Change the searchURL to API URL + searchString, when API will be ready
+        const searchURL = 'https://run.mocky.io/v3/920c336c-197e-4e24-a67f-63fe1ebff46f'
+         props.onClickSearchHandler(searchURL)
+      },
+      [props.onClickSearchHandler],
+    )
+    
+    
 
     const history = useHistory();
     const onCreateChordHandler = () => history.push('/chords/main/create');

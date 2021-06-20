@@ -74,23 +74,23 @@ function Main() {
         }
     }
 
+    const fetchChords = async (URL) => {
+        setLoading(true);
+
+        try {
+            const response = await axios.get(URL);
+            const chords = response.data;
+
+            setChords(chords);
+            setSelectedChord(chords[0]);
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
     useEffect(() => {
-      const fetchChords = async () => {
-          setLoading(true);
-
-          try {
-              const response = await axios.get('https://run.mocky.io/v3/1ebf42f8-041c-4dbf-848c-3c55570f5e5e');
-              const chords = response.data;
-
-              setChords(chords);
-              setSelectedChord(chords[0]);
-          } catch (error) {
-              console.log(error);
-          } finally {
-              setLoading(false);
-          }
-      };
-
       const fetchTemplateList = async () => {
         setTemplateLoading(true);
 
@@ -109,9 +109,14 @@ function Main() {
       fetchTemplateList()
 
       fetchChords();
+      
+        const URL = 'https://run.mocky.io/v3/1ebf42f8-041c-4dbf-848c-3c55570f5e5e';
+
+      fetchChords(URL);
     }, []);
 
     const onFilterClickHandler = () => setShowFilters(!showFilters);
+    const onClickSearchHandler = (URL) => fetchChords(URL);
 
     const onDeleteByIds = (selectedIds) => {
         addSnack({
@@ -180,7 +185,8 @@ function Main() {
                     onFilterClick={onFilterClickHandler} 
                     templateLoading={templateLoading}
                     templateList={templateList}
-                    />
+                    onClickSearchHandler={onClickSearchHandler}
+                />
             </HeaderContainer>
             {showFilters && (
                 <FiltersContainer>
