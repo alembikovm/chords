@@ -1,8 +1,9 @@
 import axios from 'axios';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {GridItem, PlusIcon } from "fronton-react";
 import {useHistory, useRouteMatch} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
+import { unwrapResult } from '@reduxjs/toolkit';
 import StartLayout from './StartLayout';
 import Header from '../../components/Header';
 import Main from './Main';
@@ -11,7 +12,7 @@ import SearchTitle from './SearchTitle';
 import Loader from '../../components/Loader';
 import {SearchString, Dropdown, Button} from '../../../../common';
 import useSearchString from '../../../../../hooks/useSearchString';
-import {setLoading, setChords, setSelectedChord} from '../../../../../slices/chords/chordsSlice';
+import {fetchChords} from '../../../../../slices/chords/chordsSlice';
 
 function Chords() {
     const history = useHistory();
@@ -32,27 +33,26 @@ function Chords() {
         onChangeSearchBy,
     } = useSearchString();
 
-    const fetchChords = async (URL) => {
-        dispatch(setLoading(true));
+    // const fetchChords = async (URL) => {
+    //     dispatch(setLoading(true));
 
-        try {
-            const response = await axios.get(URL);
-            const chords = response.data;
+    //     try {
+    //         const response = await axios.get(URL);
+    //         const chords = response.data;
 
-            dispatch(setChords(chords));
-            dispatch(setSelectedChord(chords[0]));
-        } catch (error) {
-            console.log(error);
-        } finally {
-            dispatch(setLoading(false));
-        }
-    };
+    //         dispatch(setChords(chords));
+    //         dispatch(setSelectedChord(chords[0]));
+    //     } catch (error) {
+    //         console.log(error);
+    //     } finally {
+    //         dispatch(setLoading(false));
+    //     }
+    // };
 
     const onSearchHandler = async () => {
-        const URL = 'https://run.mocky.io/v3/1ebf42f8-041c-4dbf-848c-3c55570f5e5e';
-        await fetchChords(URL);
-
-        history.push(`${path}/main/${selectedChord.chordId}`);
+        dispatch(fetchChords())
+            .then(unwrapResult)
+            .then((chords) => history.push(`${path}/main/${chords[0].chordId}`));
     };
 
     const onCreateChordHandler = () => history.push(`${path}/main/add`);

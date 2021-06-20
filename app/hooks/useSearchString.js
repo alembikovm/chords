@@ -26,9 +26,14 @@ function useSearchString() {
     ];
 
     const [chordType, setChordType] = useState('');
+    const [templateTypeId, setTemplateTypeId] = useState('');
     const [searchString, setSearchString] = useState('');
     const [searchBy, setSearchBy] = useState('Поиск по SKU');
     const [disableSearch, setDisableSearch] = useState(true);
+
+    function onChangeTemplateTypeIdHandler(event) {
+        setTemplateTypeId(event.target.id);
+    }
 
     function onChangeChordTypeHandler(event) {
         setChordType(event.target.value);
@@ -46,6 +51,7 @@ function useSearchString() {
     return {
         chordsItems,
         searchByItems,
+        templateTypeId,
         chordType,
         searchString,
         searchBy,
@@ -53,6 +59,7 @@ function useSearchString() {
         onChangeChordTypeHandler,
         onChangeSearchString,
         onChangeSearchBy,
+        onChangeTemplateTypeIdHandler,
     };
 }
 
