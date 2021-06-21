@@ -66,49 +66,57 @@ function List({items, onDelete}) {
 
     return (
         <ListWrapper>
-            <ListHeader>
-                <Header
-                    checkedAll={checkedAll}
-                    checkedChordsQuantity={checkedIds.length}
-                    foundChordsQuantity={chords.length}
-                    onCheckedAll={onCheckedAllHandler}
-                    onDelete={() => {
-                        onDelete(checkedIds);
-                        setCheckedIds([]);
-                        setCheckedAll(false);
-                    }}
-                />
-            </ListHeader>
-            <ScrollContainer>
-                <ListItems>
-                    {chords.slice(
-                        (currentPage - 1) * itemsPerPage,
-                        currentPage * itemsPerPage
-                    ).map((chord) => (
-                        <ListItem
-                            key={chord.chordId}
-                            {...chord}
-                            onItemClick={onItemClickHandler}
-                            onCheckChord={onCheckChordHandler}
+            {(!chords.length) ? (
+                <div style={{height: '100%', display: 'grid', placeItems: 'center', fontSize: '22px'}}>
+                    Пусто :(
+                </div>
+            ) : (
+                <>
+                    <ListHeader>
+                        <Header
+                            checkedAll={checkedAll}
+                            checkedChordsQuantity={checkedIds.length}
+                            foundChordsQuantity={chords.length}
+                            onCheckedAll={onCheckedAllHandler}
+                            onDelete={() => {
+                                onDelete(checkedIds);
+                                setCheckedIds([]);
+                                setCheckedAll(false);
+                            }}
                         />
-                    ))}
-                </ListItems>
-            </ScrollContainer>
-            <ListFooter>
-                <Pagination
-                    itemsCount={itemsCount}
-                    itemsPerPage={itemsPerPage}
-                    currentPage={currentPage}
-                    prevText={"<"}
-                    nextText={">"}
-                    item={(value) =>
-                        <PaginationItem onClick={() => onPageClickHandler(value)}>
-                            {value}
-                        </PaginationItem>
-                    }
-                    className='pagination'
-                />
-            </ListFooter>
+                    </ListHeader>
+                    <ScrollContainer>
+                        <ListItems>
+                            {chords.slice(
+                                (currentPage - 1) * itemsPerPage,
+                                currentPage * itemsPerPage
+                            ).map((chord) => (
+                                <ListItem
+                                    key={chord.chordId}
+                                    {...chord}
+                                    onItemClick={onItemClickHandler}
+                                    onCheckChord={onCheckChordHandler}
+                                />
+                            ))}
+                        </ListItems>
+                    </ScrollContainer>
+                    <ListFooter>
+                        <Pagination
+                            itemsCount={itemsCount}
+                            itemsPerPage={itemsPerPage}
+                            currentPage={currentPage}
+                            prevText={"<"}
+                            nextText={">"}
+                            item={(value) =>
+                                <PaginationItem onClick={() => onPageClickHandler(value)}>
+                                    {value}
+                                </PaginationItem>
+                            }
+                            className='pagination'
+                        />
+                    </ListFooter>
+                </>
+            )}
         </ListWrapper>
     );
 }
