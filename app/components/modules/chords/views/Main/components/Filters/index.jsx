@@ -31,7 +31,7 @@ function Filters({ onFilter }) {
         {key: '2', value: 'СУХИЕ\xa0СМЕСИ'},
         {key: '3', value: 'СТРОИТ\xa0МАТЕРИАЛЫ'},
         {key: '4', value: 'КАНАЛИЗ\xa0И\xa0ВОДОСТОКИ'},
-        {key: '5', value: 'КРОВЕЛЬНЫЕ\xa0СИСТЕМЫ'},  
+        {key: '5', value: 'КРОВЕЛЬНЫЕ\xa0СИСТЕМЫ'},
     ];
 
     const typeItems = [
@@ -39,7 +39,7 @@ function Filters({ onFilter }) {
         {key: '2', value: 'ПРИЦЕПЫ'},
         {key: '3', value: 'СТРОИТЕЛЬНЫЕ\xa0ЛЕСА'},
         {key: '4', value: 'КАНАЛИЗ\xa0И\xa0ВОДОСТОКИ'},
-        {key: '5', value: 'БЕТОНОСМЕСИТЕЛИ'},  
+        {key: '5', value: 'БЕТОНОСМЕСИТЕЛИ'},
     ];
 
     const subjectItems = [
@@ -47,13 +47,13 @@ function Filters({ onFilter }) {
         {key: '2', value: 'СУХИЕ\xa0СМЕСИ'},
         {key: '3', value: 'СТРОИТ\xa0МАТЕРИАЛЫ'},
         {key: '4', value: 'КАНАЛИЗ\xa0И\xa0ВОДОСТОКИ'},
-        {key: '5', value: 'КРОВЕЛЬНЫЕ\xa0СИСТЕМЫ'},  
+        {key: '5', value: 'КРОВЕЛЬНЫЕ\xa0СИСТЕМЫ'},
     ];
 
     return (
         <FiltersContainer>
             <FiltersBlock>
-                <div style={{ maxWidth: '160px', width: '100%' }}>
+                <div style={{ maxWidth: '160px', width: '100%', overflow: 'hidden' }}>
                     <Input
                         value={filters.sku}
                         onChange={(event) => onChangeFilters('sku', event.target.value)}
@@ -61,7 +61,7 @@ function Filters({ onFilter }) {
                         placeholder='Введи SKU'
                     />
                 </div>
-                <div style={{ maxWidth: '150px', width: '100%' }}>
+                <div style={{ maxWidth: '150px', width: '100%', overflow: 'hidden' }}>
                     <Dropdown
                         value={filters.type}
                         items={subjectItems}
@@ -69,7 +69,7 @@ function Filters({ onFilter }) {
                         placeholder='Подотдел'
                     />
                 </div>
-                <div style={{ maxWidth: '150px', width: '100%' }}>
+                <div style={{ maxWidth: '150px', width: '100%', overflow: 'hidden' }}>
                     <Dropdown
                         value={filters.type}
                         items={typeItems}
@@ -77,7 +77,7 @@ function Filters({ onFilter }) {
                         placeholder='Тип'
                     />
                 </div>
-                <div style={{ maxWidth: '150px', width: '100%' }}>
+                <div style={{ maxWidth: '150px', width: '100%', overflow: 'hidden' }}>
                     <Dropdown
                         value={filters.subtype}
                         items={subtypeItems}
@@ -85,7 +85,7 @@ function Filters({ onFilter }) {
                         placeholder='Подтип'
                     />
                 </div>
-                <div style={{ maxWidth: '120px', width: '100%' }}>
+                <div style={{ maxWidth: '120px', width: '100%', overflow: 'hidden' }}>
                     <Dropdown
                         value={filters.model}
                         items={modelItems}
