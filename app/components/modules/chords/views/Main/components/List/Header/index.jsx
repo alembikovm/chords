@@ -34,7 +34,7 @@ function Header({
                         kind="icon"
                         size='s'
                         disabled={isDisabledButton}
-                        icononly
+                        iconOnly
                     >
                         <DownloadIcon />
                     </Button>
@@ -44,7 +44,7 @@ function Header({
                         kind="icon"
                         size='s'
                         disabled={isDisabledButton}
-                        icononly
+                        iconOnly
                         onClick={onDelete}
                     >
                         <TrashListIcon />

@@ -23,7 +23,8 @@ function ListItem({
     onItemClick,
 }) {
     return (
-        <ListItemWrapper onClick={() => onItemClick(chordId)}>
+        // <ListItemWrapper onClick={() => onItemClick(chordId)}>
+        <ListItemWrapper>
             <CheckedContainer style={{marginTop: '4px'}}>
                 <Checkbox checked={checked} onChange={(value) => onCheckChord(value, chordId)}/>
             </CheckedContainer>

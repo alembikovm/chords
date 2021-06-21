@@ -2,18 +2,31 @@ import axios from 'axios';
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 
 export const fetchChords = createAsyncThunk(
-    'users/fetchChords',
+    'chords/fetchChords',
     async () => {
-      const response = await axios.get('https://run.mocky.io/v3/1ebf42f8-041c-4dbf-848c-3c55570f5e5e');
-      return response.data
+        // Change the fetchChotdsURL to API URL, when API will be ready
+        const fetchChordsURL = 'https://run.mocky.io/v3/1ebf42f8-041c-4dbf-848c-3c55570f5e5e';
+        const response = await axios.get(fetchChordsURL);
+        return response.data
     }
-  )
+);
+
+export const fetchChordById = createAsyncThunk(
+    'chords/fetchChordById',
+    async (chordId) => {
+        // Change the fetchChotdByIdURL to API URL, when API will be ready
+        const fetchChotdByIdURL = 'https://run.mocky.io/v3/d487ed34-63cf-4355-9af5-fad54e8c284e';
+        const response = await axios.get(fetchChotdByIdURL);
+        return response.data;
+    },
+);
 
 export const chordsSlice = createSlice({
     name: 'chords',
     initialState: {
         chords: [],
         selectedChord: null,
+        selectedChordStatus: 'idle',
         loading: false,
     },
     reducers: {
@@ -22,6 +35,9 @@ export const chordsSlice = createSlice({
         },
         setSelectedChord: (state, action) => {
             state.selectedChord = action.payload;
+        },
+        setSelectedChordStatus: (state, action) => {
+            state.setSelectedChordStatus = action.payload;
         },
         setLoading: (state, action) => {
             state.loading = action.payload;
@@ -32,9 +48,19 @@ export const chordsSlice = createSlice({
             state.chords = action.payload;
             state.selectedChord = action.payload[0];
         },
+        [fetchChordById.pending]: (state, action) => {
+            state.setSelectedChordStatus = 'loading';
+        },
+        [fetchChordById.fulfilled]: (state, action) => {
+            state.selectedChordStatus = 'succeeded';
+            state.selectedChord = action.payload;
+        },
+        [fetchChordById.rejected]: (state, action) => {
+            state.selectedChordStatus = 'failed';
+        },
     },
 });
 
-export const {setChords, setSelectedChord, setLoading} = chordsSlice.actions;
+export const {setChords, setSelectedChord, setLoading, setSelectedChordStatus} = chordsSlice.actions;
 
 export default chordsSlice.reducer;

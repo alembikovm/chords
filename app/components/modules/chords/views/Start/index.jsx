@@ -1,9 +1,8 @@
-import axios from 'axios';
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {GridItem, PlusIcon } from "fronton-react";
 import {useHistory, useRouteMatch} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
-import { unwrapResult } from '@reduxjs/toolkit';
+import {unwrapResult} from '@reduxjs/toolkit';
 import StartLayout from './StartLayout';
 import Header from '../../components/Header';
 import Main from './Main';
@@ -18,7 +17,6 @@ function Chords() {
     const history = useHistory();
     const {path} = useRouteMatch();
     const dispatch = useDispatch();
-    const selectedChord = useSelector((state) => state.chords.selectedChord);
     const loading = useSelector((state) => state.chords.loading);
 
     const {
@@ -32,22 +30,6 @@ function Chords() {
         onChangeSearchString,
         onChangeSearchBy,
     } = useSearchString();
-
-    // const fetchChords = async (URL) => {
-    //     dispatch(setLoading(true));
-
-    //     try {
-    //         const response = await axios.get(URL);
-    //         const chords = response.data;
-
-    //         dispatch(setChords(chords));
-    //         dispatch(setSelectedChord(chords[0]));
-    //     } catch (error) {
-    //         console.log(error);
-    //     } finally {
-    //         dispatch(setLoading(false));
-    //     }
-    // };
 
     const onSearchHandler = async () => {
         dispatch(fetchChords())

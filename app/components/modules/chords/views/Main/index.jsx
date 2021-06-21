@@ -34,7 +34,7 @@ function Main() {
     const { state: snackbarState, addSnack, removeSnack } = useSnackbar();
     const history = useHistory();
     const dispatch = useDispatch();
-    const { path } = useRouteMatch();
+    const {path} = useRouteMatch();
     const [loading, setLoading] = useState(false);
     const [showFilters, setShowFilters] = useState(false);
     const chordsStore = useSelector((state) => state.chords.chords);
@@ -72,7 +72,7 @@ function Main() {
     const onSearchHandler = async () => {
         dispatch(fetchChords())
             .then(unwrapResult)
-            .then((chords) => history.push(`${path}/main/${chords[0].chordId}`));
+            .then((chords) => history.push(`${path}/${chords[0].chordId}`));
     };
 
     const onDeleteByIds = (ids) => {

@@ -8,7 +8,14 @@ import {
 import SearchIcon from '../icons/SearchIcon';
 import SearchStringContainer from './SearchStringContainer';
 
-function SearchString(props) {
+function SearchString({
+    dropdownValue,
+    dropdownItems,
+    disabled,
+    onDropdownChange,
+    onSearch,
+    ...props
+}) {
     return (
         <SearchStringContainer
             inputSize='m'
@@ -16,18 +23,18 @@ function SearchString(props) {
             startAdornment={
                 <Dropdown
                     size='s'
-                    value={props.dropdownValue}
-                    items={props.dropdownItems}
-                    disabled={props.disabled}
-                    onChange={props.onDropdownChange}
+                    value={dropdownValue}
+                    items={dropdownItems}
+                    disabled={disabled}
+                    onChange={onDropdownChange}
                 />
             }
             endAdornment={
                 <Button
                     size='s'
                     iconOnly
-                    disabled={props.disabled}
-                    onClick={props.onSearch}
+                    disabled={disabled}
+                    onClick={onSearch}
                 >
                     <SearchIcon size='24px' />
                 </Button>

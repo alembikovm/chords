@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import {useHistory} from 'react-router-dom';
+import {useHistory, useRouteMatch} from 'react-router-dom';
 import {PlusIcon, useUniqID} from 'fronton-react';
 import Buttons from '../Buttons';
 import { SearchString, Dropdown, Button } from '../../../../../common';
@@ -19,10 +19,12 @@ function ChordsHeader(props) {
         onChangeChordTypeHandler,
         onChangeSearchString,
         onChangeSearchBy,
-        onChangeTemplateTypeIdHandler
+        onChangeTemplateTypeIdHandler,
     } = useSearchString();
 	
 	const history = useHistory();
+	const {path} = useRouteMatch();
+
     const onCreateChordHandler = () => history.push(`${path}/add`);
 
     const onSearchHandler = useCallback(
@@ -32,14 +34,14 @@ function ChordsHeader(props) {
         props.onClickSearchHandler(searchURL)
       },
       [props.onClickSearchHandler],
-    )
+    );
 
     const templateListWithLinks = props.templateList.map(template => ({id: template.id, value: <a href={template.href} target="_blank">{template.value}</a>}));
     const templateListListWithDownload = [{id: useUniqID(), value: <a href="#">Загрузить</a>}, ...templateListWithLinks];
 
     return (
         <Buttons>
-            <div style={{maxWidth: '256px', width: '100%'}}>
+            <div style={{maxWidth: '256px', minWidth: '256px'}}>
                 <Dropdown
                     placeholder="Выберите тип связки"
                     value={chordType}
