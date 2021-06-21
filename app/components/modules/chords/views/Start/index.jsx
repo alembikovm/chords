@@ -25,7 +25,6 @@ function Chords() {
         chordType,
         searchString,
         searchBy,
-        disableSearch,
         onChangeChordTypeHandler,
         onChangeSearchString,
         onChangeSearchBy,
@@ -68,7 +67,7 @@ function Chords() {
                             <SearchString
                                 value={searchString}
                                 placeholder="Введи SKU"
-                                disabled={disableSearch}
+                                disabled={!chordType}
                                 dropdownValue={searchBy}
                                 dropdownItems={searchByItems}
                                 onDropdownChange={onChangeSearchBy}

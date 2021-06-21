@@ -27,6 +27,7 @@ export const chordsSlice = createSlice({
         chords: [],
         selectedChord: null,
         selectedChordStatus: 'idle',
+        currentChordType: '',
         loading: false,
     },
     reducers: {
@@ -42,25 +43,34 @@ export const chordsSlice = createSlice({
         setLoading: (state, action) => {
             state.loading = action.payload;
         },
+        setCurrentChordType: (state, action) => {
+            state.currentChordType = action.payload;
+        },
     },
     extraReducers: {
         [fetchChords.fulfilled]: (state, action) => {
             state.chords = action.payload;
             state.selectedChord = action.payload[0];
         },
-        [fetchChordById.pending]: (state, action) => {
+        [fetchChordById.pending]: (state) => {
             state.setSelectedChordStatus = 'loading';
         },
         [fetchChordById.fulfilled]: (state, action) => {
             state.selectedChordStatus = 'succeeded';
             state.selectedChord = action.payload;
         },
-        [fetchChordById.rejected]: (state, action) => {
+        [fetchChordById.rejected]: (state) => {
             state.selectedChordStatus = 'failed';
         },
     },
 });
 
-export const {setChords, setSelectedChord, setLoading, setSelectedChordStatus} = chordsSlice.actions;
+export const {
+    setChords,
+    setSelectedChord,
+    setLoading,
+    setSelectedChordStatus,
+    setCurrentChordType,
+} = chordsSlice.actions;
 
 export default chordsSlice.reducer;

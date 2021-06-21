@@ -19,7 +19,7 @@ function Table({rows, baseEntity, disabledSwitchers = false, disabledEdit = fals
                     <th style={{width: '100px'}}>SKU</th>
                     <th style={{width: '350px'}}>Название</th>
                     <th style={{width: '120px'}}>Главный SKU</th>
-                    <th style={{width: '150px'}}>Количество</th>
+                    <th style={{width: '150px', textAlign: 'center'}}>Количество</th>
                     <th></th>
                 </tr>
             </TableHead>

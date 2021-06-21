@@ -1,18 +1,15 @@
 import {useState} from 'react';
-
-// this.state = {
-//     chordType: '',
-//     searchString: '',
-//     searchBy: 'Поиск по SKU',
-//     disableSearch: true,
-// };
+import {useDispatch, useSelector} from 'react-redux';
+import {setCurrentChordType} from '../slices/chords/chordsSlice';
 
 function useSearchString() {
+    const dispatch = useDispatch();
+
     const chordsItems = [
         {id: 1, value: 'Компоненты'},
         {id: 2, value: 'Дублоны'},
         {id: 3, value: 'Похожие\xa0товары'},
-        {id: 4, value: 'Комплименты'},
+        {id: 4, value: 'Комплементы'},
         {id: 5, value: 'Замена'},
     ];
 
@@ -25,19 +22,17 @@ function useSearchString() {
         {id: 6, value: 'Поиск\xa0по\xa0модели'},
     ];
 
-    const [chordType, setChordType] = useState('');
+    const chordType = useSelector((state) => state.chords.currentChordType);
     const [templateTypeId, setTemplateTypeId] = useState('');
     const [searchString, setSearchString] = useState('');
     const [searchBy, setSearchBy] = useState('Поиск по SKU');
-    const [disableSearch, setDisableSearch] = useState(true);
 
     function onChangeTemplateTypeIdHandler(event) {
         setTemplateTypeId(event.target.id);
     }
 
     function onChangeChordTypeHandler(event) {
-        setChordType(event.target.value);
-        setDisableSearch(false);
+        dispatch(setCurrentChordType(event.target.value));
     }
 
     function onChangeSearchString(event) {
@@ -55,7 +50,6 @@ function useSearchString() {
         chordType,
         searchString,
         searchBy,
-        disableSearch,
         onChangeChordTypeHandler,
         onChangeSearchString,
         onChangeSearchBy,

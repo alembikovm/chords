@@ -2,7 +2,6 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react'
 import {
     GridItem,
-    PlusIcon,
     useSnackbar,
     Snackbar,
     Snack,
@@ -11,16 +10,13 @@ import {
 import { unwrapResult } from '@reduxjs/toolkit';
 import { Switch, Route, useRouteMatch, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import FilterIcon from '../../../../common/icons/FilterIcon';
 import MainLayout from './MainLayout';
 import Header from '../../components/Header';
-import Filters from './Filters';
+import FiltersContainer from './FiltersContainer';
 import ListContainer from './ListContainer';
 import MainContainer from './Main';
-import Buttons from './Buttons';
 import List from './components/List';
 import Loader from './components/Loader';
-import { Button } from '../../../../common';
 import { ChordAdd, ChordEdit, ChordView } from './subviews';
 import {
     setChords as setChordsAction,
@@ -29,6 +25,7 @@ import {
 import InfoIcon from '../../../../common/icons/InfoIcon';
 import ChordsHeader from './components/ChordsHeader';
 import { fetchChords } from '../../../../../slices/chords/chordsSlice';
+import Filters from './components//Filters';
 
 function Main() {
     const { state: snackbarState, addSnack, removeSnack } = useSnackbar();
@@ -65,15 +62,19 @@ function Main() {
         }
 
         fetchTemplateList()
-    });
+    }, []);
 
     const onShowFiltersHandler = () => setShowFilters(!showFilters);
 
-    const onSearchHandler = async () => {
+    const fetchMockedChords = async () => {
         dispatch(fetchChords())
             .then(unwrapResult)
             .then((chords) => history.push(`${path}/${chords[0].chordId}`));
     };
+
+    const onSearchHandler = () => fetchMockedChords();
+
+    const onFilterHandler = () => fetchMockedChords();
 
     const onDeleteByIds = (ids) => {
         addSnack({
@@ -162,28 +163,13 @@ function Main() {
                         templateList={templateList}
                         onClickSearchHandler={onSearchHandler}
                     />
-                    {/* <Buttons>
-                        <Button
-                            iconLeft={<FilterIcon />}
-                            variant='pseudo'
-                            onClick={onShowFiltersHandler}
-                        >
-                            Фильтр
-                        </Button>
-                        <Button
-                            iconLeft={<PlusIcon />}
-                            onClick={onCreateChordHandler}
-                        >
-                            Создать связку
-                        </Button>
-                    </Buttons> */}
                 </Header>
             </GridItem>
             {showFilters && (
                 <GridItem area='filters'>
-                    <Filters>
-                        filters
-                    </Filters>
+                    <FiltersContainer>
+                        <Filters onFilter={onFilterHandler} />
+                    </FiltersContainer>
                 </GridItem>
             )}
             <GridItem area='list'>
