@@ -33,33 +33,35 @@ function ChordAdd() {
     const onCancel = () => history.go(-1);
 
     return (
-        <ChordAddWrapper>
-            <h2>Создание связки</h2>
-            <FormGroup>
-                <Dropdown
-                    placeholder="Выберите тип связки"
-                    label='Тип связки'
-                    value={chordType}
-                    items={chordsItems}
-                    size='lg'
-                    onChange={onChangeChordTypeHandler}
-                />
-                {isChordTypeSelected && (
-                    <FullWidthInput
-                        inputSize='lg'
-                        label='Поиск SKU'
-                        placeholder='Введите SKU, чтобы добавить в связку'
-                        value={searchString}
-                        onChange={onChangeSearchString}
+        <div style={{height: '100%', display: 'flex', flexDirection: 'column'}}>
+            <ChordAddWrapper>
+                <h2>Создание связки</h2>
+                <FormGroup>
+                    <Dropdown
+                        placeholder="Выберите тип связки"
+                        label='Тип связки'
+                        value={chordType}
+                        items={chordsItems}
+                        size='lg'
+                        onChange={onChangeChordTypeHandler}
                     />
-                )}
-            </FormGroup>
-            <Table rows={[]} />
+                    {isChordTypeSelected && (
+                        <FullWidthInput
+                            inputSize='lg'
+                            label='Поиск SKU'
+                            placeholder='Введите SKU, чтобы добавить в связку'
+                            value={searchString}
+                            onChange={onChangeSearchString}
+                        />
+                    )}
+                </FormGroup>
+                <Table rows={[]} />
+            </ChordAddWrapper>
             <FooterButtons>
                 <Button variant='secondary' onClick={onCancel}>Отменить</Button>
                 <Button>Сохранить изменения</Button>
             </FooterButtons>
-        </ChordAddWrapper>
+        </div>
     );
 }
 

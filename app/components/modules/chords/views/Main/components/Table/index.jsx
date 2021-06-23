@@ -1,7 +1,6 @@
 import React from 'react';
 import {Counter} from 'fronton-react';
 import NameCell from './NameCell';
-import ScrollContainer from './ScrollContainer';
 import TableBody from './TableBody';
 import TableHead from './TableHead';
 import TableWrapper from './TableWrapper';
@@ -13,20 +12,20 @@ function Table({rows, baseEntity, disabledSwitchers = false, disabledEdit = fals
     const isBaseEntity = (entityId) => entityId === baseEntity?.entityId;
 
     return (
-        <TableWrapper>
-            <TableHead>
-                <tr>
-                    <th style={{width: '100px'}}>SKU</th>
-                    <th style={{width: '350px'}}>Название</th>
-                    <th style={{width: '120px'}}>Главный SKU</th>
-                    <th style={{width: '150px', textAlign: 'center'}}>Количество</th>
-                    <th></th>
-                </tr>
-            </TableHead>
-            <ScrollContainer>
+        <div style={{flex: '1 1 auto', position: 'relative'}}>
+            <TableWrapper>
+                <TableHead>
+                    <tr>
+                        <th style={{width: '100px'}}>SKU</th>
+                        <th style={{width: '350px'}}>Название</th>
+                        <th style={{width: '120px'}}>Главный SKU</th>
+                        <th style={{width: '150px', textAlign: 'center'}}>Количество</th>
+                        <th></th>
+                    </tr>
+                </TableHead>
                 <TableBody>
                     {rows.map(({entityId, name, mainPhoto, quantity}) => (
-                        <tr>
+                        <tr key={entityId}>
                             <td style={{width: '100px'}}>{entityId}</td>
                             <td style={{width: '350px'}}>
                                 <NameCell name={name} mainPhoto={mainPhoto} />
@@ -60,8 +59,8 @@ function Table({rows, baseEntity, disabledSwitchers = false, disabledEdit = fals
                         </tr>
                     ))}
                 </TableBody>
-            </ScrollContainer>
-        </TableWrapper>
+            </TableWrapper>
+        </div>
     );
 }
 

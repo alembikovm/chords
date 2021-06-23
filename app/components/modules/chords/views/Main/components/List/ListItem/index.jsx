@@ -1,5 +1,5 @@
 import React from 'react';
-import {Checkbox} from 'fronton-react';
+import {Checkbox, Tooltip} from 'fronton-react';
 import Chord from './Chord';
 import ChordId from './ChordId';
 import ChordSKU from './ChordSKU';
@@ -27,12 +27,14 @@ function ListItem({
     return (
         // <ListItemWrapper onClick={() => onItemClick(chordId)}>
         <ListItemWrapper>
-            <CheckedContainer style={{marginTop: '4px'}}>
+            <CheckedContainer>
                 <Checkbox checked={checked} onChange={(value) => onCheckChord(value, chordId)}/>
             </CheckedContainer>
             <Chord>
                 <ChordTitle>
-                    <ChordId>ID {chordId}</ChordId>
+                    <Tooltip title={chordId}>
+                        <ChordId>ID {chordId}</ChordId>
+                    </Tooltip>
                     <ChordType>{getChordsType(chordType)}</ChordType>
                 </ChordTitle>
                 <ChordSKU>

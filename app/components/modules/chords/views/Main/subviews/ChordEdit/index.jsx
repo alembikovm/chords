@@ -9,7 +9,7 @@ import Header from './Header';
 import Main from './Main';
 import Title from './Title';
 import Table from '../../components/Table';
-import TrashIcon from '../../../../../../common/icons/TrashIcon';
+import TrashListIcon from '../../../../../../common/icons/TrashListIcon';
 import {Button, Dropdown, FullWidthInput} from '../../../../../../common';
 import getChordsType from '../../helpers/getChordsType';
 import FormGroup from "./FormGroup";
@@ -43,7 +43,7 @@ function ChordEdit() {
             {(selectedChordStatus === 'loading' || selectedChordStatus === 'idle') ? (
                 <Loader />
             ) : (
-                <>
+                <div style={{height: '100%', display: 'flex', flexDirection: 'column'}}>
                     <Header>
                         <Title>
                             <ChordId>{selectedChord.chordId}</ChordId>
@@ -51,7 +51,7 @@ function ChordEdit() {
                         </Title>
                         <ActionButtons>
                             <Button variant='secondary' iconOnly rounded>
-                                <TrashIcon size='15px' />
+                                <TrashListIcon size='15px' />
                             </Button>
                         </ActionButtons>
                     </Header>
@@ -82,7 +82,7 @@ function ChordEdit() {
                         <Button variant='secondary' onClick={onCancel}>Отменить</Button>
                         <Button>Сохранить изменения</Button>
                     </FooterButtons>
-                </>
+                </div>
             )}
         </ChordEditWrapper>
     );

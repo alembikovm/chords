@@ -12,7 +12,7 @@ import Main from './Main';
 import Title from './Title';
 import Table from '../../components/Table';
 import EditIcon from '../../../../../../common/icons/EditIcon';
-import TrashIcon from '../../../../../../common/icons/TrashIcon';
+import TrashListIcon from '../../../../../../common/icons/TrashListIcon';
 import { Button } from '../../../../../../common';
 import getChordsType from '../../helpers/getChordsType';
 import { fetchChordById} from '../../../../../../../slices/chords/chordsSlice';
@@ -50,14 +50,16 @@ function ChordView({ onDelete }) {
                                 <EditIcon size='15px' />
                             </Button>
                             <Button variant='secondary' onClick={() => onDelete([selectedChord.chordId])} iconOnly rounded>
-                                <TrashIcon size='15px' />
+                                <TrashListIcon size='15px' />
                             </Button>
                         </ActionButtons>
                     </Header>
                     <Main>
-                        <Button size='s' variant='secondary' iconLeft={<PlusIcon />} onClick={onEditHandler}>
-                            Добавить SKU
-                        </Button>
+                        <div>
+                            <Button size='s' variant='secondary' iconLeft={<PlusIcon />} onClick={onEditHandler}>
+                                Добавить SKU
+                            </Button>
+                        </div>
                         <Table
                             rows={selectedChord.relatedEntities}
                             baseEntity={selectedChord.baseEntity}

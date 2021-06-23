@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
 export default styled.form`
-  position: relative;
   overflow-x: hidden;
   overflow-y: auto;
-  height: 100%;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
   padding: var(--space-225) var(--space-375);
 `;

@@ -1,11 +1,8 @@
 import styled from 'styled-components';
 
 export default styled.tbody`
-  position: absolute;
-  top: 0;
-  left: 0;
   display: block;
-  overflow: auto;
+  overflow: hidden auto;
   
   tr {
     display: table;
