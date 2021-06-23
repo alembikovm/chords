@@ -36,6 +36,10 @@ export default styled.label`
 		background-color: var(--control-primary);
 	}
 
+	input:disabled + .slider {
+		opacity: 0.5;
+	}
+
 	input:checked + .slider:before {
 		transform: translateX(20px);
 	}

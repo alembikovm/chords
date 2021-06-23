@@ -49,7 +49,12 @@ function ListItem({
                         3 SKU
                     </p>
                     <div style={{marginLeft: 'var(--space-200)'}}>
-                        <Info title={chordType}  />
+                        <Info title={`
+                            ${136} SKU - активные SKU без даты AVS или до даты AVS больше 3-х месяцев
+                            ${6} SKU - SKU с датой AVS и стоком, до даты AVS менее 3-х месяцев и есть стоки/дата AVS уже наступила, но все еще есть остатки
+                            ${3} SKU - SKU с наступившей датой AVS и без стоков
+                        
+                        `} />
                     </div>
                 </ChordSKU>
                 <ChordText>

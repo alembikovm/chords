@@ -6,6 +6,7 @@ import {
     Snackbar,
     Snack,
     SnackButton,
+    CloseIcon,
 } from 'fronton-react';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { Switch, Route, useRouteMatch, useHistory } from 'react-router-dom';
@@ -79,7 +80,7 @@ function Main() {
     const onDeleteByIds = (ids) => {
         addSnack({
             id: 'onConfirmDeleteChordsSnack',
-            title: 'Вы действительно хотите удалить связку?',
+            title: `Вы действительно хотите удалить ${ids.length > 1 ? 'связки' : 'связку'}?`,
             type: 'alert',
             time: false,
             icon: <InfoIcon color='brand-dark' />,
@@ -97,7 +98,7 @@ function Main() {
     const onConfirmDeleteByIds = async (selectedIds) => {
         let snack = {
             id: 'onDeleteChordSnack',
-            title: 'Связки успешно удалены',
+            title: selectedIds.length > 1 ? 'Связки успешно удалены' : 'Связка успешно удалена',
             type: 'success',
             time: true,
         };
@@ -107,9 +108,10 @@ function Main() {
             const updatedChords = chords.filter((chord) => !selectedIds.includes(chord.chordId));
 
             setChords(updatedChords);
-            setSelectedChord(chords[0]);
-            dispatch(setChordsAction(chords));
-            dispatch(setSelectedChordAction(selectedChord));
+            setSelectedChord(updatedChords[0]);
+            dispatch(setChordsAction(updatedChords));
+            dispatch(setSelectedChordAction(updatedChords[0]));
+            history.push(`${path}/main/${updatedChords[0].chordId}`);
         } catch (error) {
             snack = {
                 ...snack,
@@ -136,11 +138,21 @@ function Main() {
         <MainLayout
             areas={getAreas()}
             rows={getRows()}
-            columns={['1fr', '2fr']}
+            columns={['minmax(488px, 1fr)', '2fr']}
             gap='space-10'
         >
             <Snackbar>
-                {snackbarState.map(({ id, title, type, time, onClick, wideButton, closeButton, confirmButton, buttonText }) => (
+                {snackbarState.map(({
+                    id,
+                    title,
+                    type,
+                    time,
+                    onClick,
+                    wideButton,
+                    closeButton,
+                    confirmButton,
+                    buttonText
+                }) => (
                     <Snack
                         key={id}
                         id={id}
@@ -150,6 +162,7 @@ function Main() {
                         wideButton={wideButton}
                         closeButton={closeButton}
                     >
+                        {closeButton && <SnackButton onClick={() => removeSnack(id)}>Закрыть</SnackButton>}
                         {confirmButton && <SnackButton onClick={onClick}>{buttonText}</SnackButton>}
                     </Snack>
                 ))}
