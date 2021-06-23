@@ -22,6 +22,8 @@ function ListItem({
     onCheckChord,
     onItemClick,
 }) {
+    const plugPhotoURL = 'https://res.cloudinary.com/lmru/image/upload/photoiscoming.png';
+
     return (
         // <ListItemWrapper onClick={() => onItemClick(chordId)}>
         <ListItemWrapper>
@@ -54,7 +56,7 @@ function ListItem({
                     Пример SKU в связке:
                 </ChordText>
                 <Entity>
-                    <img src={baseEntity.mainPhoto} width='48px' height='48px' />
+                    <img src={baseEntity.mainPhoto || plugPhotoURL} width='48px' height='48px' />
                     <EntityName>
                         {baseEntity.name}
                     </EntityName>
