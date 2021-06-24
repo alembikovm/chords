@@ -1,5 +1,4 @@
 import React from 'react';
-import {Checkbox} from 'fronton-react';
 import {Button} from '../../../../../../../common';
 import DownloadIcon from '../../../../../../../common/icons/DownloadIcon';
 import TrashListIcon from '../../../../../../../common/icons/TrashListIcon';
@@ -10,6 +9,7 @@ import DownloadChords from './DownloadChords';
 import HeaderWrapper from './HeaderWrapper';
 import LeftBlock from './LeftBlock';
 import CheckedContainer from '../CheckedContainer';
+import Checkbox from '../../../../../../../common/Checkbox';
 
 function Header({
     checkedAll,
@@ -24,7 +24,7 @@ function Header({
         <HeaderWrapper>
             <LeftBlock>
                 <CheckedContainer>
-                    <Checkbox checked={checkedAll} disabled={!foundChordsQuantity} onChange={onCheckedAll} />
+                    <Checkbox checked={checkedAll} onChange={onCheckedAll} />
                 </CheckedContainer>
                 <ChordsQuantityText>
                     {checkedChordsQuantity} связок выбрано
@@ -34,7 +34,6 @@ function Header({
                         kind="icon"
                         size='s'
                         disabled={isDisabledButton}
-                        iconOnly
                     >
                         <DownloadIcon />
                     </Button>
@@ -44,7 +43,6 @@ function Header({
                         kind="icon"
                         size='s'
                         disabled={isDisabledButton}
-                        iconOnly
                         onClick={onDelete}
                     >
                         <TrashListIcon />

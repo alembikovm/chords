@@ -160,7 +160,6 @@ function Main() {
                         variant={type}
                         autoHideTimer={time ? 3000 : undefined}
                         wideButton={wideButton}
-                        closeButton={closeButton}
                     >
                         {closeButton && <SnackButton onClick={() => removeSnack(id)}>Закрыть</SnackButton>}
                         {confirmButton && <SnackButton onClick={onClick}>{buttonText}</SnackButton>}

@@ -49,8 +49,9 @@ function List({items, onDelete}) {
         clearConfirmDeleteSnack();
         
         const chordIndex = chords.findIndex((chord) => chordId === chord.chordId);
-        const updatedChords = [...chords];
+        const updatedChords = JSON.parse(JSON.stringify(chords));
         updatedChords[chordIndex].checked = checked;
+        setChords(updatedChords);
 
         if (checked) {
             setCheckedIds([...checkedIds, chordId]);
@@ -65,7 +66,6 @@ function List({items, onDelete}) {
 
     const onItemClickHandler = (chordId) => {
         const selectedChord = chords.find((chord) => chord.chordId === chordId);
-        delete selectedChord.checked;
 
         dispatch(setSelectedChord(selectedChord));
         history.push(`${path}/${chordId}`);

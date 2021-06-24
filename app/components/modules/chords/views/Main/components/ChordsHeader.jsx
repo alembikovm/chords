@@ -8,7 +8,6 @@ import useSearchString from '../../../../../../hooks/useSearchString';
 import FilterIcon from '../../../../../common/icons/FilterIcon';
 
 function ChordsHeader(props) {
-    console.log(props);
     const {
         chordsItems,
         searchByItems,

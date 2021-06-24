@@ -1,5 +1,5 @@
 import React from 'react';
-import {Checkbox, Tooltip} from 'fronton-react';
+import {Tooltip} from 'fronton-react';
 import Chord from './Chord';
 import ChordId from './ChordId';
 import ChordSKU from './ChordSKU';
@@ -13,6 +13,7 @@ import ListItemWrapper from './ListItemWrapper';
 import CheckedContainer from '../CheckedContainer';
 import Info from '../../../../../../../common/Info';
 import getChordsType from '../../../helpers/getChordsType';
+import Checkbox from '../../../../../../../common/Checkbox';
 
 function ListItem({
     chordId,
@@ -25,10 +26,9 @@ function ListItem({
     const plugPhotoURL = 'https://res.cloudinary.com/lmru/image/upload/photoiscoming.png';
 
     return (
-        // <ListItemWrapper onClick={() => onItemClick(chordId)}>
-        <ListItemWrapper>
+        <ListItemWrapper onClick={() => onItemClick(chordId)}>
             <CheckedContainer>
-                <Checkbox checked={checked} onChange={(value) => onCheckChord(value, chordId)}/>
+               <Checkbox checked={checked} onChange={(value) => onCheckChord(value, chordId)}/>
             </CheckedContainer>
             <Chord>
                 <ChordTitle>
