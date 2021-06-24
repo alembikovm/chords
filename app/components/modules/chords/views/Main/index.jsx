@@ -6,7 +6,6 @@ import {
     Snackbar,
     Snack,
     SnackButton,
-    CloseIcon,
 } from 'fronton-react';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { Switch, Route, useRouteMatch, useHistory } from 'react-router-dom';
@@ -160,6 +159,7 @@ function Main() {
                         variant={type}
                         autoHideTimer={time ? 3000 : undefined}
                         wideButton={wideButton}
+                        closeButton={closeButton}
                     >
                         {closeButton && <SnackButton onClick={() => removeSnack(id)}>Закрыть</SnackButton>}
                         {confirmButton && <SnackButton onClick={onClick}>{buttonText}</SnackButton>}

@@ -17,7 +17,7 @@ import FooterButtons from '../../components/FooterButtons';
 import Loader from '../../components/Loader';
 import {fetchChordById} from '../../../../../../../slices/chords/chordsSlice';
 
-function ChordEdit() {
+function ChordEdit({onDelete}) {
     const history = useHistory();
     const dispatch = useDispatch();
     const {chordId} = useParams();
@@ -50,7 +50,7 @@ function ChordEdit() {
                             <ChordType>{getChordsType(selectedChord.chordType)}</ChordType>
                         </Title>
                         <ActionButtons>
-                            <Button variant='secondary' iconOnly rounded>
+                            <Button variant='secondary' onClick={() => onDelete([selectedChord.chordId])} iconOnly rounded>
                                 <TrashListIcon size='15px' />
                             </Button>
                         </ActionButtons>
