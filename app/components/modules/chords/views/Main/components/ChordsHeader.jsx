@@ -6,6 +6,7 @@ import { SearchString, Dropdown, Button } from '../../../../../common';
 import Loader from './Loader';
 import useSearchString from '../../../../../../hooks/useSearchString';
 import FilterIcon from '../../../../../common/icons/FilterIcon';
+import Search from '../../../../../common/Search';
 
 function ChordsHeader(props) {
     const {
@@ -48,19 +49,7 @@ function ChordsHeader(props) {
                     onChange={onChangeChordTypeHandler}
                 />
             </div>
-            <div style={{ maxWidth: '412px', minWidth: '300px' }}>
-                <SearchString
-                    value={searchString}
-                    placeholder="Введи SKU"
-                    disabled={!chordType}
-                    dropdownValue={searchBy}
-                    dropdownItems={searchByItems}
-                    to='/chords/main'
-                    onDropdownChange={onChangeSearchBy}
-                    onChange={onChangeSearchString}
-                    onSearch={onSearchHandler}
-                />
-            </div>
+            <Search onSearch={onSearchHandler} />
             <Button
                 iconLeft={<FilterIcon />}
                 variant='pseudo'
