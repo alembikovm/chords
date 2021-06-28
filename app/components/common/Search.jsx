@@ -217,7 +217,7 @@ function Search({
                 }}
                 placeholder="Введи SKU" // searchBy
                 value={{value: searchString.value, label: searchString.value}}
-                onChange={({value}) => setSearchString(value)}
+                onChange={(value) => setSearchString(value)}
                 loadOptions={getChords}
             />
 
