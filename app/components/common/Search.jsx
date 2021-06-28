@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import Select, { components } from 'react-select';
 import AsyncSelect from 'react-select/async';
 import Button from "./Button";
@@ -22,16 +23,23 @@ function Search({
     disabled = false,
     onSearch
 }) {
-    const {searchString} = useSearchString();
+    const {searchString, setSearchString} = useSearchString();
 
     const autocompleteStyles = {
         container: (provided, state) => ({
             ...provided,
             width: 412,
         }),
+        control: (provided) => ({
+            ...provided,
+            '&:hover': { borderColor: '#464C5C' },
+            borderColor: "#464C5C",
+            boxShadow: "none",
+
+        }),
         placeholder: (base) => ({
             ...base,
-            margin: 0,
+            marginLeft: 160,
             fontSize: 16,
             lineHeight: 24,
             fontWeight: 400,
@@ -48,6 +56,15 @@ function Search({
             fontSize: 18,
             padding: 0,
         }),
+        singleValue: (base)=>({
+            ...base,
+            marginLeft: 160,
+            width: 160
+        }),
+        valueContainer: (base)=>({
+            ...base,
+            marginRight: 40,
+        })
     };
 
     const dropdownStyles = {
@@ -109,7 +126,7 @@ function Search({
             {...innerProps}
             as={ReactRouterLink}
             to="/chords/main"
-            style={{ width: 40, height: 40, borderRadius: "0px 4px 4px 0px" }}
+            style={{ width: 40, height: 40, borderRadius: "0px 4px 4px 0px", marginTop: -1 }}
             iconOnly
             disabled={disabled}
             onClick={onSearch}
@@ -150,6 +167,43 @@ function Search({
         );
     };
 
+    const Menu = props => {
+        if (props.selectProps.inputValue.length === 0) return null;
+      
+        return (
+          <>
+            <components.Menu {...props} />
+          </>
+        )
+      }
+
+    const getChords = async (input) => {
+        if (!input) {
+			return Promise.resolve({ options: [] });
+		}
+
+        let inputValue = input;
+
+        const deviders = [",", " ", ", ", ";", "; ", "#", "# "];
+
+        deviders.forEach(devider =>{
+                if (inputValue.includes(devider)) {
+                    inputValue = inputValue.split(devider);
+                }
+            });
+
+        const lastDevidedInput = inputValue[inputValue.length - 1];
+
+        // For integration with API add query to link e.g: `https://api.github.com/search/users?q=${input}`
+		const {data} = await axios.get(`https://run.mocky.io/v3/1ebf42f8-041c-4dbf-848c-3c55570f5e5e`);
+
+
+        const filtredData = data.filter(chord => chord.baseEntity.entityId.startsWith(typeof inputValue === "string" ? input : lastDevidedInput ));
+
+        
+        return filtredData.map(({chordId, baseEntity}) => ({value: baseEntity.entityId, label:baseEntity.name}));
+    }
+
     return (
         <div style={{position: 'relative'}}>
             <AsyncSelect
@@ -158,10 +212,13 @@ function Search({
                     DropdownIndicator: SearchButton,
                     IndicatorSeparator: () => null,
                     ClearIndicator: () => null,
-                    NoOptionsMessage: NoOptionsMessage,
+                    NoOptionsMessage,
+                    Menu,
                 }}
                 placeholder="Введи SKU" // searchBy
-                value={searchString}
+                value={{value: searchString.value, label: searchString.value}}
+                onChange={({value}) => setSearchString(value)}
+                loadOptions={getChords}
             />
 
             <div style={{ position: "absolute", top: 2, left: 0 }}>
@@ -170,7 +227,6 @@ function Search({
                     styles={dropdownStyles}
                     defaultValue={dropdownItems[0]}
                     isSearchable={false}
-                    // menuIsOpen
                     components={{
                         IndicatorSeparator: () => null,
                         Placeholder: () => null,
@@ -189,7 +245,7 @@ function Search({
                 />
             </div>
 
-            <Button
+            {searchString && (<Button
                 style={{
                     background: "transparent",
                     position: "absolute",
@@ -199,7 +255,7 @@ function Search({
                 onClick={() => setSearchString("")}
             >
                 <ClearIcon width={10} height={10} />
-            </Button>
+            </Button>)}
         </div>
     );
 }

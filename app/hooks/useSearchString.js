@@ -49,6 +49,7 @@ function useSearchString() {
         templateTypeId,
         chordType,
         searchString,
+        setSearchString,
         searchBy,
         onChangeChordTypeHandler,
         onChangeSearchString,
