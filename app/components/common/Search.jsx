@@ -39,7 +39,7 @@ function Search({
         }),
         placeholder: (base) => ({
             ...base,
-            marginLeft: 160,
+            width: 160,
             fontSize: 16,
             lineHeight: 24,
             fontWeight: 400,
@@ -47,7 +47,6 @@ function Search({
         input: (provided) => ({
             ...provided,
             margin: 0,
-            marginLeft: 162,
             fontSize: 18,
         }),
         noOptionsMessage: (base) => ({
@@ -58,11 +57,11 @@ function Search({
         }),
         singleValue: (base)=>({
             ...base,
-            marginLeft: 160,
             width: 160
         }),
         valueContainer: (base)=>({
             ...base,
+            marginLeft: 162,
             marginRight: 40,
         })
     };
@@ -203,7 +202,7 @@ function Search({
         
         return filtredData.map(({chordId, baseEntity}) => ({value: baseEntity.entityId, label:baseEntity.name}));
     }
-
+    
     return (
         <div style={{position: 'relative'}}>
             <AsyncSelect
@@ -216,7 +215,7 @@ function Search({
                     Menu,
                 }}
                 placeholder="Введи SKU" // searchBy
-                value={{value: searchString.value, label: searchString.value}}
+                value={searchString ? {value: searchString.value, label: searchString.value}: searchString}
                 onChange={(value) => setSearchString(value)}
                 loadOptions={getChords}
             />
